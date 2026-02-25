@@ -88,30 +88,31 @@ export default function ProjectStartExperience() {
             <AnimatePresence>
                 {step > 0 && step < 5 && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        exit={{ opacity: 0, y: -10 }}
                         className="absolute top-0 left-0 right-0 h-1 bg-foreground/5 rounded-full overflow-hidden"
                     >
                         <motion.div
                             className="h-full bg-primary"
                             initial={{ width: 0 }}
                             animate={{ width: `${progress}%` }}
-                            transition={{ type: "spring", stiffness: 50, damping: 20 }}
+                            transition={{ type: "spring", stiffness: 100, damping: 20 }}
                         />
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
                 {/* Step 0: Emotional Hook */}
                 {step === 0 && (
                     <motion.div
                         key="hook"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.05 }}
-                        className="text-center py-20"
+                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 1.02 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-center py-20 will-change-transform"
                     >
                         <h2 className="text-4xl md:text-7xl font-bold tracking-tighter text-foreground mb-8 text-balance">
                             Let’s Create Something <br />
@@ -122,7 +123,7 @@ export default function ProjectStartExperience() {
                         </p>
                         <Button
                             onClick={handleNext}
-                            className="h-16 px-12 rounded-full bg-primary hover:bg-foreground text-white text-lg font-bold group transition-all"
+                            className="h-16 px-12 rounded-full bg-primary hover:bg-foreground text-white text-lg font-bold group transition-all active:scale-95"
                         >
                             Start Your Project
                             <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -137,7 +138,8 @@ export default function ProjectStartExperience() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="w-full py-12"
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="w-full py-12 will-change-transform"
                     >
                         <div className="text-center mb-12">
                             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Step 1 of 4</span>
@@ -152,9 +154,9 @@ export default function ProjectStartExperience() {
                                         handleNext();
                                     }}
                                     className={cn(
-                                        "p-6 rounded-2xl border text-left transition-all group",
+                                        "p-6 rounded-2xl border text-left transition-all active:scale-[0.98] transform-gpu",
                                         formData.serviceType === type.label
-                                            ? "bg-primary border-primary text-white"
+                                            ? "bg-primary border-primary text-white shadow-lg shadow-primary/20"
                                             : "bg-white border-foreground/5 hover:border-primary/30 hover:shadow-xl hover:shadow-foreground/5"
                                     )}
                                 >
@@ -179,7 +181,8 @@ export default function ProjectStartExperience() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="w-full py-12 text-center"
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="w-full py-12 text-center will-change-transform"
                     >
                         <div className="mb-12">
                             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Step 2 of 4</span>
@@ -194,9 +197,9 @@ export default function ProjectStartExperience() {
                                         handleNext();
                                     }}
                                     className={cn(
-                                        "h-16 px-8 rounded-full border text-sm font-bold tracking-tight transition-all",
+                                        "h-16 px-8 rounded-full border text-sm font-bold tracking-tight transition-all active:scale-[0.98] transform-gpu",
                                         formData.budget === range
-                                            ? "bg-primary border-primary text-white"
+                                            ? "bg-primary border-primary text-white shadow-lg shadow-primary/20"
                                             : "bg-white border-foreground/5 hover:border-primary/30 hover:scale-105"
                                     )}
                                 >
@@ -217,7 +220,8 @@ export default function ProjectStartExperience() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="w-full py-12 max-w-xl mx-auto"
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="w-full py-12 max-w-xl mx-auto will-change-transform"
                     >
                         <div className="text-center mb-12">
                             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Step 3 of 4</span>
@@ -228,7 +232,7 @@ export default function ProjectStartExperience() {
                                 <User className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/20" />
                                 <Input
                                     placeholder="Your Name"
-                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium"
+                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium shadow-sm transition-all"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 />
@@ -238,7 +242,7 @@ export default function ProjectStartExperience() {
                                 <Input
                                     placeholder="Your Email"
                                     type="email"
-                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium"
+                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium shadow-sm transition-all"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                 />
@@ -248,7 +252,7 @@ export default function ProjectStartExperience() {
                                 <Input
                                     placeholder="Phone / WhatsApp"
                                     type="tel"
-                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium"
+                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium shadow-sm transition-all"
                                     value={formData.phone}
                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                 />
@@ -259,7 +263,7 @@ export default function ProjectStartExperience() {
                             <Button
                                 onClick={handleNext}
                                 disabled={!formData.name || !formData.email || !formData.phone}
-                                className="h-16 px-12 rounded-full bg-primary text-white font-bold"
+                                className="h-16 px-12 rounded-full bg-primary text-white font-bold transition-all active:scale-[0.98]"
                             >
                                 Continue
                             </Button>
@@ -274,7 +278,8 @@ export default function ProjectStartExperience() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="w-full py-12 max-w-xl mx-auto"
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="w-full py-12 max-w-xl mx-auto will-change-transform"
                     >
                         <div className="text-center mb-12">
                             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Step 4 of 4</span>
@@ -282,7 +287,7 @@ export default function ProjectStartExperience() {
                         </div>
                         <Textarea
                             placeholder="Tell us about your project, goals, or timeline... (Optional)"
-                            className="min-h-[200px] p-8 rounded-3xl bg-white border-foreground/5 focus:border-primary/30 text-lg leading-relaxed placeholder:text-foreground/20"
+                            className="min-h-[200px] p-8 rounded-3xl bg-white border-foreground/5 focus:border-primary/30 text-lg leading-relaxed placeholder:text-foreground/20 shadow-sm transition-all"
                             value={formData.message}
                             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         />
@@ -315,21 +320,22 @@ export default function ProjectStartExperience() {
                 {step === 5 && (
                     <motion.div
                         key="success"
-                        initial={{ opacity: 0, scale: 0.9 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="text-center py-20"
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="text-center py-20 will-change-transform"
                     >
                         <div className="w-24 h-24 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-10">
                             <PartyPopper className="w-12 h-12 text-emerald-500" />
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-foreground mb-6">You’re all set!</h2>
+                        <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-foreground mb-6 text-balance">You’re all set!</h2>
                         <p className="text-lg md:text-xl text-foreground/40 mb-12 max-w-sm mx-auto leading-relaxed">
                             Excellent choice. Our team is already reviewing your details. Expect a personalized proposal in your inbox within 24 hours.
                         </p>
                         <Button
                             onClick={() => setStep(0)}
                             variant="outline"
-                            className="rounded-full px-12 h-14"
+                            className="rounded-full px-12 h-14 active:scale-95 transition-all"
                         >
                             Back to Start
                         </Button>

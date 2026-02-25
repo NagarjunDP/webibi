@@ -38,10 +38,10 @@ export function Contact() {
                 }}
             />
 
-            {/* Premium Background Aesthetics */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
-                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[160px]" />
+            {/* Premium Background Aesthetics (Optimized for performance) */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute top-1/4 left-1/4 w-[40rem] h-[40rem] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-primary/5 via-primary/[0.02] to-transparent rounded-full" />
+                <div className="absolute bottom-1/4 right-1/4 w-[50rem] h-[50rem] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-primary/10 via-primary/[0.03] to-transparent rounded-full" />
             </div>
 
             {/* Live Activity Ticker */}
