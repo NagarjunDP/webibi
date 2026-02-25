@@ -17,57 +17,57 @@ import {
 const projects = [
     {
         id: 1,
-        title: "The Modern Apothecary",
-        client: "Apothecary & Co",
-        category: "Visual Identity",
-        image: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?q=80&w=1200&auto=format&fit=crop",
+        title: "Srimudra Events",
+        client: "Srimudra (Hyderabad)",
+        category: "Event Management",
+        image: "/portfolio/srimudra.png",
         year: "2024",
-        description: "A complete digital transformation for a heritage wellness brand, focusing on editorial elegance and conversion-driven storytelling.",
+        description: "A premium event management platform for a top Hyderabad agency, featuring elegant layouts and seamless booking flows.",
     },
     {
         id: 2,
-        title: "Lunar Systems",
-        client: "Lunar Tech",
-        category: "Product Design",
-        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+        title: "Silverstar Events",
+        client: "Silverstar Productions (Mumbai)",
+        category: "Production & Management",
+        image: "/portfolio/silverstar.png",
         year: "2024",
-        description: "Designing the interface for the next generation of space exploration and data visualization platforms.",
+        description: "Scale and authority for Mumbai's leading production house. High-performance design focused on large-scale event logistics.",
     },
     {
         id: 3,
-        title: "Verve Architecture",
-        client: "Verve Studio",
-        category: "Web Platform",
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
-        year: "2023",
-        description: "A minimalist web experience that showcases architectural masterpieces through light, shadow, and spacious design.",
+        title: "Adhishakthi Events",
+        client: "Adhishakthi",
+        category: "Visual Identity",
+        image: "/portfolio/adhishakthi.png",
+        year: "2024",
+        description: "Bespoke digital architecture for a modern event company, focusing on minimalist elegance and conversion.",
     },
     {
         id: 4,
-        title: "Solis Energy",
-        client: "Solis Corp",
-        category: "Brand Strategy",
-        image: "https://images.unsplash.com/photo-1509391366360-fe5bb58583bb?q=80&w=1200&auto=format&fit=crop",
+        title: "Vignahartha Events",
+        client: "Vignahartha",
+        category: "Digital Strategy",
+        image: "/portfolio/vignahartha.png",
         year: "2023",
-        description: "Positioning a renewable energy leader for global expansion through a powerful visual and strategic brand refresh.",
+        description: "A comprehensive brand transformation that shifted Vignahartha to a premium market position.",
     },
     {
         id: 5,
-        title: "Nimbus Cloud",
-        client: "Nimbus Tech",
-        category: "SaaS Design",
-        image: "https://images.unsplash.com/photo-1517433447743-8be36fca9967?q=80&w=1200&auto=format&fit=crop",
+        title: "Shri Events",
+        client: "Shri Events Group",
+        category: "Web Platform",
+        image: "/portfolio/shrievents.png",
         year: "2024",
-        description: "Streamlining complex cloud infrastructure data into a simple, high-performance dashboard experience.",
+        description: "Streamlined web experience for a high-volume event agency, ensuring speed and clarity for clients.",
     },
     {
         id: 6,
-        title: "Aura Lifestyle",
-        client: "Aura Brand",
-        category: "E-Commerce",
-        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop",
+        title: "Festora Events",
+        client: "Festora Team",
+        category: "Experience Design",
+        image: "/portfolio/festora.png",
         year: "2023",
-        description: "Creating a sensory-rich digital shopping experience that bridges the gap between luxury and accessibility.",
+        description: "Creating a sensory-rich digital experience that mirrors the festive atmosphere of their large-scale events.",
     },
 ];
 
@@ -80,26 +80,25 @@ export function Portfolio() {
         offset: ["start start", "end end"],
     });
 
-    // Smooth physics
+    // Highly optimized smooth physics for "Liquid" feel
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
+        stiffness: 80, // Lowered for more "mass" and smoothness
+        damping: 40,   // Increased to prevent oscillation
         restDelta: 0.001
     });
 
     // Phase 1-2: Layered Stacking (0.0 to 0.4)
-    // First card starts center, moves left. Others slide in from right and overlap.
     const stackX = useTransform(smoothProgress, [0, 0.4], ["0%", "-60%"]);
 
     // Phase 3: 3D Perspective Flip (0.4 to 0.6)
-    const rotateX = useTransform(smoothProgress, [0.4, 0.6], [0, 15]);
-    const rotateY = useTransform(smoothProgress, [0.4, 0.6], [0, -10]);
-    const z = useTransform(smoothProgress, [0.4, 0.6], [0, -300]);
+    const rotateX = useTransform(smoothProgress, [0.4, 0.6], [0, 10]);
+    const rotateY = useTransform(smoothProgress, [0.4, 0.6], [0, -5]);
+    const z = useTransform(smoothProgress, [0.4, 0.6], [0, -200]);
 
     // Phase 4: Grid Resolution (0.6 to 0.8)
     const gridOpacity = useTransform(smoothProgress, [0.6, 0.75], [0, 1]);
     const stackOpacity = useTransform(smoothProgress, [0.7, 0.8], [1, 0]);
-    const gridY = useTransform(smoothProgress, [0.6, 0.8], [100, 0]);
+    const gridY = useTransform(smoothProgress, [0.6, 0.8], [50, 0]);
 
     return (
         <section ref={sectionRef} id="portfolio" className="relative h-[600vh] bg-[#F7F7F8]">
@@ -112,7 +111,7 @@ export function Portfolio() {
                     >
                         <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-foreground/30 mb-4 lg:mb-6">Portfolio</p>
                         <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground mb-4">
-                            The Human <span className="text-primary italic font-serif">Masterpiece.</span>
+                            Selected <span className="text-primary italic font-serif">Work.</span>
                         </h2>
                     </motion.div>
                 </div>
