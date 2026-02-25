@@ -19,13 +19,24 @@ const firebaseConfig = {
     measurementId: "G-NBKBVD8EMZ" // Optional, can be env var too if needed
 };
 
-// Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+// Initialize Firebase safely
+const isConfigValid = !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
 
-// Initialize Auth, Firestore, and Storage with safety checks
-// We export these constants so they can be imported elsewhere
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+let app;
+let auth: any = null;
+let db: any = null;
+let storage: any = null;
 
+if (typeof window !== "undefined" || isConfigValid) {
+    try {
+        app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+        auth = getAuth(app);
+        db = getFirestore(app);
+        storage = getStorage(app);
+    } catch (error) {
+        console.error("Firebase initialization error:", error);
+    }
+}
+
+export { auth, db, storage };
 export default app;
