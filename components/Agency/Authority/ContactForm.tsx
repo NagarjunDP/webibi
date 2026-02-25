@@ -10,18 +10,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 const SERVICES = [
-    "Business Website",
-    "E-commerce Website",
+    "New Website",
     "Website Redesign",
     "SEO Services",
-    "Not Sure / Need Consultation"
+    "Maintenance",
+    "Not Sure"
 ];
 
 const BUDGETS = [
     "Under ₹10,000",
-    "₹10,000 – ₹25,000",
-    "₹25,000 – ₹50,000",
-    "Above ₹50,000"
+    "₹10k – ₹25k",
+    "₹25k – ₹50k",
+    "Above ₹50k"
 ];
 
 export default function ContactForm() {
@@ -42,9 +42,6 @@ export default function ContactForm() {
         setLoading(true);
 
         try {
-            // For the agency, we'll store leads in a global "agency_leads" collection
-            // or we could use a specific clientId if we had one.
-            // Using "agency_leads" for now as it's cleaner for a root agency site.
             await addDoc(collection(db, "agency_leads"), {
                 ...formData,
                 status: "new",
@@ -81,7 +78,7 @@ export default function ContactForm() {
                 </div>
                 <h3 className="text-3xl font-bold text-foreground mb-4">Inquiry Received</h3>
                 <p className="text-foreground/50 max-w-sm mb-8">
-                    Thank you for reaching out. Our team has received your request and will get back to you within 24 hours.
+                    Thank you! Our team has received your request and will contact you shortly.
                 </p>
                 <Button
                     onClick={() => setSuccess(false)}
@@ -104,11 +101,11 @@ export default function ContactForm() {
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Full Name *</label>
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Name *</label>
                         <Input
                             required
-                            placeholder="John Doe"
-                            className="h-14 rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all"
+                            placeholder="Your Name"
+                            className="h-14 rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all placeholder:text-foreground/20"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
@@ -116,8 +113,8 @@ export default function ContactForm() {
                     <div className="space-y-2">
                         <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Business Name</label>
                         <Input
-                            placeholder="Your Company"
-                            className="h-14 rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all"
+                            placeholder="Optional"
+                            className="h-14 rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all placeholder:text-foreground/20"
                             value={formData.businessName}
                             onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
                         />
@@ -130,19 +127,19 @@ export default function ContactForm() {
                         <Input
                             required
                             type="email"
-                            placeholder="john@example.com"
-                            className="h-14 rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all"
+                            placeholder="Required"
+                            className="h-14 rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all placeholder:text-foreground/20"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Phone Number *</label>
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Phone / WhatsApp *</label>
                         <Input
                             required
                             type="tel"
-                            placeholder="+91 98765 43210"
-                            className="h-14 rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all"
+                            placeholder="Required"
+                            className="h-14 rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all placeholder:text-foreground/20"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         />
@@ -151,34 +148,34 @@ export default function ContactForm() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Service Needed</label>
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Project Type</label>
                         <select
-                            className="w-full h-14 rounded-xl bg-foreground/[0.02] border border-foreground/5 focus:border-primary/30 px-4 text-sm outline-none transition-all appearance-none"
+                            className="w-full h-14 rounded-xl bg-foreground/[0.02] border border-foreground/5 focus:border-primary/30 px-4 text-sm outline-none transition-all appearance-none text-foreground/60"
                             value={formData.serviceType}
                             onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
                         >
-                            <option value="" disabled>Select a service</option>
+                            <option value="">Select Category</option>
                             {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
                         </select>
                     </div>
                     <div className="space-y-2">
                         <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Budget Range</label>
                         <select
-                            className="w-full h-14 rounded-xl bg-foreground/[0.02] border border-foreground/5 focus:border-primary/30 px-4 text-sm outline-none transition-all appearance-none"
+                            className="w-full h-14 rounded-xl bg-foreground/[0.02] border border-foreground/5 focus:border-primary/30 px-4 text-sm outline-none transition-all appearance-none text-foreground/60"
                             value={formData.budget}
                             onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                         >
-                            <option value="" disabled>Select your budget</option>
+                            <option value="">Select Range</option>
                             {BUDGETS.map(b => <option key={b} value={b}>{b}</option>)}
                         </select>
                     </div>
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Project Details</label>
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 ml-1">Message (Optional)</label>
                     <Textarea
                         placeholder="Tell us about your project, goals, and timeline..."
-                        className="min-h-[120px] rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all py-4"
+                        className="min-h-[120px] rounded-xl bg-foreground/[0.02] border-foreground/5 focus:border-primary/30 transition-all py-4 placeholder:text-foreground/20"
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     />
@@ -198,17 +195,18 @@ export default function ContactForm() {
                     )}
                 </Button>
 
-                <div className="flex flex-col gap-4 pt-4">
-                    <div className="flex items-center gap-3 text-foreground/30">
-                        <ShieldCheck className="w-4 h-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Your information is secure & private</span>
+                <div className="flex flex-col gap-4 pt-4 border-t border-foreground/5">
+                    <div className="flex items-center gap-3 text-foreground/40">
+                        <ShieldCheck className="w-4 h-4 text-primary/60" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest">We respect your privacy. No spam.</span>
                     </div>
-                    <div className="flex items-center gap-3 text-foreground/30">
-                        <Clock className="w-4 h-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">We typically respond within 24 hours</span>
+                    <div className="flex items-center gap-3 text-foreground/40">
+                        <Clock className="w-4 h-4 text-primary/60" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Typical response time: Within 24 hours</span>
                     </div>
                 </div>
             </form>
         </motion.div>
     );
 }
+

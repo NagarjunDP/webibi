@@ -1,84 +1,87 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MessageSquare, MapPin, CheckCircle2 } from "lucide-react";
-import ContactForm from "./ContactForm";
-
-const TRUST_POINTS = [
-    "Free 30-minute consultation",
-    "Transparent, fixed-rate pricing",
-    "Fast delivery & rapid response",
-    "Dedicated premium support"
-];
+import ProjectStartExperience from "./ProjectStartExperience";
+import { Zap } from "lucide-react";
 
 export function Contact() {
     return (
-        <section id="contact" className="section-padding bg-[#F8F9FA] overflow-hidden">
-            <div className="container mx-auto px-6 md:px-8">
-                <div className="grid lg:grid-cols-[1fr_1.1fr] gap-16 lg:gap-24 items-start">
+        <section id="contact" className="relative section-padding bg-[#F8F9FA] overflow-hidden min-h-screen flex items-center">
+            {/* SEO Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "LocalBusiness",
+                        "name": "Digital Empire",
+                        "image": "/logo.png",
+                        "@id": "",
+                        "url": "https://webibi.vercel.app",
+                        "telephone": "+919876543210",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "",
+                            "addressLocality": "Bengaluru",
+                            "addressRegion": "KA",
+                            "postalCode": "",
+                            "addressCountry": "IN"
+                        },
+                        "contactPoint": {
+                            "@type": "ContactPoint",
+                            "telephone": "+919876543210",
+                            "contactType": "customer service",
+                            "areaServed": "IN",
+                            "availableLanguage": ["en", "hi"]
+                        }
+                    })
+                }}
+            />
 
-                    {/* Left Side: Impact Copy & Trust */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                        <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-foreground/30 mb-8">Get in Touch</p>
-                        <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground mb-8 leading-[0.95]">
-                            Let’s Build Your <br />
-                            <span className="text-primary italic font-serif">Future Masterpiece.</span>
-                        </h2>
-                        <p className="text-lg lg:text-xl text-foreground/50 mb-12 leading-relaxed max-w-lg">
-                            Tell us about your business goals and we’ll suggest a bespoke technical solution tailored for your success.
-                        </p>
+            {/* Premium Background Aesthetics */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
+                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[160px]" />
+            </div>
 
-                        <div className="space-y-6 mb-16">
-                            {TRUST_POINTS.map((point, i) => (
-                                <div key={i} className="flex items-center gap-4">
-                                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                        <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    </div>
-                                    <span className="text-sm font-bold text-foreground/70">{point}</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="grid sm:grid-cols-2 gap-8 pt-12 border-t border-foreground/5">
-                            <div className="space-y-4">
-                                <p className="text-[10px] uppercase tracking-widest text-foreground/30 font-bold">Direct Line</p>
-                                <a href="tel:+919876543210" className="flex items-center gap-3 text-lg font-bold text-foreground hover:text-primary transition-colors">
-                                    <Phone className="w-5 h-5" />
-                                    +91 98765 43210
-                                </a>
-                                <a href="https://wa.me/919876543210" className="flex items-center gap-3 text-lg font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
-                                    <MessageSquare className="w-5 h-5 fill-current" />
-                                    WhatsApp Us
-                                </a>
-                            </div>
-                            <div className="space-y-4">
-                                <p className="text-[10px] uppercase tracking-widest text-foreground/30 font-bold">Email</p>
-                                <a href="mailto:hello@digitalempire.studio" className="flex items-center gap-3 text-lg font-bold text-foreground hover:text-primary transition-colors">
-                                    <Mail className="w-5 h-5" />
-                                    hello@digitalempire.studio
-                                </a>
-                                <div className="flex items-center gap-3 text-lg font-bold text-foreground/40">
-                                    <MapPin className="w-5 h-5" />
-                                    Bengaluru, India
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Right Side: Premium Form Card */}
-                    <div id="contact-form" className="relative">
-                        {/* Decorative background element */}
-                        <div className="absolute -top-12 -right-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
-                        <ContactForm />
-                    </div>
+            {/* Live Activity Ticker */}
+            <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1, duration: 1 }}
+                className="fixed top-24 right-6 md:right-12 z-50 hidden sm:flex items-center gap-3 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-foreground/5 shadow-xl shadow-foreground/5"
+            >
+                <div className="relative">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping absolute inset-0" />
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 relative z-10" />
                 </div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/60">
+                    12 businesses started projects this week
+                </span>
+            </motion.div>
+
+            <div className="container mx-auto px-6 md:px-8 relative z-10">
+                <ProjectStartExperience />
+
+                {/* Footer Trust Section */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="mt-20 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 border-t border-foreground/5 pt-12"
+                >
+                    <div className="flex items-center gap-3 grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all cursor-default">
+                        <Zap className="w-5 h-5" />
+                        <span className="text-xs font-bold uppercase tracking-widest">Premium Engineering</span>
+                    </div>
+                    <div className="flex items-center gap-3 grayscale opacity-30">
+                        <span className="text-xs font-bold uppercase tracking-widest">Secure Cloud Architecture</span>
+                    </div>
+                    <div className="flex items-center gap-3 grayscale opacity-30">
+                        <span className="text-xs font-bold uppercase tracking-widest">Global CDN Delivery</span>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );
 }
-
