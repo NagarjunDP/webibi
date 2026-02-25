@@ -38,6 +38,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
 
     useEffect(() => {
+        if (!auth || !db) {
+            console.warn("[AuthContext] Firebase services not initialized. Auth is disabled.");
+            setLoading(false);
+            return;
+        }
+
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setFirebaseUser(currentUser);
 
@@ -83,6 +89,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const signInWithGoogle = useCallback(async () => {
+        if (!auth) {
+            alert("Auth is currently disabled. Check your configuration.");
+            return;
+        }
         try {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider);
@@ -92,6 +102,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const logout = useCallback(async () => {
+        if (!auth) return;
         try {
             await firebaseSignOut(auth);
             router.push('/');

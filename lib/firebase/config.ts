@@ -20,14 +20,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase safely
-const isConfigValid = !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+const isConfigValid = !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY && process.env.NEXT_PUBLIC_FIREBASE_API_KEY !== "undefined";
 
-let app;
+let app: any = null;
 let auth: any = null;
 let db: any = null;
 let storage: any = null;
 
-if (typeof window !== "undefined" || isConfigValid) {
+if (isConfigValid) {
     try {
         app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
         auth = getAuth(app);
@@ -36,6 +36,8 @@ if (typeof window !== "undefined" || isConfigValid) {
     } catch (error) {
         console.error("Firebase initialization error:", error);
     }
+} else {
+    console.warn("Firebase configuration is missing or invalid. Services are disabled.");
 }
 
 export { auth, db, storage };
