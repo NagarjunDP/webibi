@@ -52,9 +52,9 @@ export function Trust() {
 
                             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 py-10 border-t border-foreground/5">
                                 <div className="flex -space-x-3">
-                                    {[1, 2, 3, 4].map((i) => (
+                                    {[1, 2, 3, 4, 5, 6].map((i) => (
                                         <div key={i} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-4 border-[#F7F7F8] bg-slate-200 relative overflow-hidden">
-                                            <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="Founder" className="w-full h-full object-cover" />
+                                            <img src={`https://i.pravatar.cc/150?u=${i + 20}`} alt="Founder" className="w-full h-full object-cover" />
                                         </div>
                                     ))}
                                 </div>
@@ -64,7 +64,7 @@ export function Trust() {
                                             <Star key={i} className="w-3 h-3 fill-primary text-primary" />
                                         ))}
                                     </div>
-                                    <p className="text-[10px] md:text-sm font-bold tracking-tight text-foreground uppercase">Trusted by 50+ High-Growth Founders</p>
+                                    <p className="text-[10px] md:text-sm font-bold tracking-tight text-foreground uppercase">Trusted by 100+ High-Growth Startups & SMBs</p>
                                 </div>
                             </div>
 

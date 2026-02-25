@@ -6,8 +6,10 @@ import { ControlPreview } from "./Authority/ControlPreview";
 import { SEOSection } from "./Authority/SEOSection";
 import { Pricing } from "./Authority/Pricing";
 import { Portfolio } from "./Authority/Portfolio";
+import Process from "./Authority/Process";
 import { Contact } from "./Authority/Contact";
 import { Footer } from "./Authority/Footer";
+import FloatingCTA from "./Authority/FloatingCTA";
 
 export default function AgencyWebsite() {
     return (
@@ -16,12 +18,14 @@ export default function AgencyWebsite() {
             <Hero />
             <Trust />
             <Portfolio />
+            <Process />
             <Features />
             <ControlPreview />
             <SEOSection />
             <Pricing />
             <Contact />
             <Footer />
+            <FloatingCTA />
         </main>
     );
 }

@@ -8,22 +8,22 @@ const services = [
     {
         number: "01",
         title: "Bespoke Design & Identity",
-        description: "We define your digital soul. Crafting high-end visual identities that resonate with premium audiences.",
+        description: "Premium, human-crafted UI/UX for Indian startups. We build high-end visual identities that build instant trust and credibility for your brand.",
     },
     {
         number: "02",
-        title: "High-Performance Engineering",
-        description: "Technical excellence meets human-crafted code. Fast, safe, and future-proof digital foundations.",
+        title: "Affordable High-End Engineering",
+        description: "Next-generation technical excellence at affordable prices. We build fast, SEO-ready websites with absolute zero monthly retainers.",
     },
     {
         number: "03",
-        title: "E-Commerce Experiences",
-        description: "Transforming transactions into transitions. Seamless shopping for high-intent customers.",
+        title: "E-Commerce Success",
+        description: "Transform your business with high-conversion e-commerce solutions. Optimized for mobile shoppers and lightning-fast transactions.",
     },
     {
         number: "04",
-        title: "SEO & Growth Strategy",
-        description: "Organic clarity in a noisy world. We ensure your business is found by those who value it most.",
+        title: "SEO & Growth Dominance",
+        description: "Don't just launch, rank. Our search engine optimized architectures ensure you stay ahead of the competition on Google and beyond.",
     },
 ];
 

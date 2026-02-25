@@ -24,8 +24,14 @@ interface SequenceStep {
 const SEQUENCE: SequenceStep[] = [
     {
         lines: [
-            { parts: [{ text: "Bespoke", weight: 'bold' }, { text: "Digital", highlight: true }] },
-            { parts: [{ text: "Architecture.", weight: 'bold' }] }
+            { parts: [{ text: "Affordable", highlight: true }, { text: "Premium", weight: 'bold' }] },
+            { parts: [{ text: "Web Design.", weight: 'bold' }] }
+        ]
+    },
+    {
+        lines: [
+            { parts: [{ text: "Indian", highlight: true }, { text: "SMBs &", weight: 'light' }] },
+            { parts: [{ text: "Startups.", weight: 'bold' }] }
         ]
     },
     {
@@ -36,20 +42,14 @@ const SEQUENCE: SequenceStep[] = [
     },
     {
         lines: [
-            { parts: [{ text: "You Own", weight: 'light' }] },
-            { parts: [{ text: "Your Soul.", highlight: true }] }
+            { parts: [{ text: "SEO-Ready", weight: 'bold' }] },
+            { parts: [{ text: "Architectures.", highlight: true }] }
         ]
     },
     {
         lines: [
-            { parts: [{ text: "Premium", weight: 'bold' }] },
-            { parts: [{ text: "Engineering.", highlight: true }] }
-        ]
-    },
-    {
-        lines: [
-            { parts: [{ text: "WEBIBI", highlight: true }] },
-            { parts: [{ text: "Studio.", weight: 'light' }] }
+            { parts: [{ text: "Digital", highlight: true }] },
+            { parts: [{ text: "Empire India.", weight: 'light' }] }
         ]
     }
 ];
@@ -95,12 +95,15 @@ export function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                         >
+                            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
+                                #1 for Indian Startups & SMBs
+                            </span>
                             <h1 className="text-5xl md:text-7xl lg:text-[80px] xl:text-[100px] font-bold tracking-tight text-foreground leading-[0.95] md:leading-[0.9] mb-6 md:mb-8 text-balance">
-                                Websites That Make Businesses Look <span className="text-primary italic">Premium.</span>
+                                Websites That Scale Your <span className="text-primary italic">Business.</span>
                             </h1>
 
                             <p className="text-base md:text-lg lg:text-xl text-foreground/60 mb-8 md:mb-10 leading-relaxed max-w-[90%] md:max-w-[85%] mx-auto lg:mx-0">
-                                We craft intentional digital experiences for founders who value excellence. No templates, just pure, human-designed precision.
+                                Affordable, SEO-ready, and ultra-fast. We build intentional digital experiences for founders who value excellence over high monthly retainers.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start">
