@@ -3,6 +3,9 @@ export interface Lead {
     name: string;
     email: string;
     phone: string;
+    businessName?: string;
+    serviceType?: string;
+    budget?: string;
     message: string;
     status: 'new' | 'contacted' | 'resolved';
     createdAt: any;

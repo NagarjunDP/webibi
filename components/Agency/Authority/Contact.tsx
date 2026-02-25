@@ -1,72 +1,84 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Mail, Phone, ArrowUpRight, Sparkles } from "lucide-react";
-import Link from "next/link";
+import { Mail, Phone, MessageSquare, MapPin, CheckCircle2 } from "lucide-react";
+import ContactForm from "./ContactForm";
+
+const TRUST_POINTS = [
+    "Free 30-minute consultation",
+    "Transparent, fixed-rate pricing",
+    "Fast delivery & rapid response",
+    "Dedicated premium support"
+];
 
 export function Contact() {
     return (
-        <section id="contact" className="relative section-padding bg-[#0B0D12] overflow-hidden">
-            {/* Background Texture / Grain would go here if we had one */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+        <section id="contact" className="section-padding bg-[#F8F9FA] overflow-hidden">
+            <div className="container mx-auto px-6 md:px-8">
+                <div className="grid lg:grid-cols-[1fr_1.1fr] gap-16 lg:gap-24 items-start">
 
-            <div className="container mx-auto px-8 relative z-10">
-                <div className="max-w-6xl mx-auto text-center">
+                    {/* Left Side: Impact Copy & Trust */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-white/10 bg-white/5 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-8 lg:mb-12">
-                            <Sparkles className="w-3 h-3 fill-primary" />
-                            <span>Available for Q2 2026</span>
-                        </div>
-
-                        <h2 className="text-4xl sm:text-7xl lg:text-[120px] xl:text-[140px] font-bold tracking-tighter text-white leading-[0.9] lg:leading-[0.85] mb-16 lg:mb-20">
-                            Let’s Build Something <br className="hidden sm:block" />
-                            That <span className="text-primary italic">Actually Works</span> <br className="hidden sm:block" />
-                            For Your Business.
+                        <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-foreground/30 mb-8">Get in Touch</p>
+                        <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground mb-8 leading-[0.95]">
+                            Let’s Build Your <br />
+                            <span className="text-primary italic font-serif">Future Masterpiece.</span>
                         </h2>
-
-                        <p className="text-lg lg:text-3xl text-white/40 mb-16 lg:mb-20 max-w-3xl mx-auto leading-relaxed font-serif italic">
-                            Stop settling for templates. Invest in a digital masterpiece that commands authority and delivers results.
+                        <p className="text-lg lg:text-xl text-foreground/50 mb-12 leading-relaxed max-w-lg">
+                            Tell us about your business goals and we’ll suggest a bespoke technical solution tailored for your success.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-8 mb-24 lg:mb-32">
-                            <Link href="#contact-form" className="w-full sm:w-auto">
-                                <Button className="w-full rounded-full px-12 lg:px-16 h-16 lg:h-20 bg-primary hover:bg-white hover:text-foreground text-white text-lg lg:text-xl font-bold transition-all active:scale-[0.98] shadow-2xl shadow-primary/20">
-                                    Get Started Now
-                                </Button>
-                            </Link>
-                            <Link href="tel:+919876543210" className="w-full sm:w-auto">
-                                <Button variant="ghost" className="w-full rounded-full px-12 h-16 lg:h-20 text-white hover:bg-white/5 text-lg lg:text-xl font-bold border border-white/10">
-                                    Call Direct
-                                </Button>
-                            </Link>
+                        <div className="space-y-6 mb-16">
+                            {TRUST_POINTS.map((point, i) => (
+                                <div key={i} className="flex items-center gap-4">
+                                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                                        <CheckCircle2 className="w-4 h-4 text-primary" />
+                                    </div>
+                                    <span className="text-sm font-bold text-foreground/70">{point}</span>
+                                </div>
+                            ))}
                         </div>
 
-                        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 border-t border-white/5 pt-16 lg:pt-20 max-w-4xl mx-auto">
-                            <div className="flex flex-col items-center lg:items-start gap-3 lg:gap-4">
-                                <span className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-bold">Inquiries</span>
-                                <a href="mailto:hello@webibi.agency" className="text-xl lg:text-3xl font-bold text-white hover:text-primary transition-colors">
-                                    hello@webibi.agency
+                        <div className="grid sm:grid-cols-2 gap-8 pt-12 border-t border-foreground/5">
+                            <div className="space-y-4">
+                                <p className="text-[10px] uppercase tracking-widest text-foreground/30 font-bold">Direct Line</p>
+                                <a href="tel:+919876543210" className="flex items-center gap-3 text-lg font-bold text-foreground hover:text-primary transition-colors">
+                                    <Phone className="w-5 h-5" />
+                                    +91 98765 43210
+                                </a>
+                                <a href="https://wa.me/919876543210" className="flex items-center gap-3 text-lg font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
+                                    <MessageSquare className="w-5 h-5 fill-current" />
+                                    WhatsApp Us
                                 </a>
                             </div>
-                            <div className="flex flex-col items-center lg:items-end gap-3 lg:gap-4">
-                                <span className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-bold">Studio</span>
-                                <p className="text-xl lg:text-3xl font-bold text-white text-center lg:text-right">
+                            <div className="space-y-4">
+                                <p className="text-[10px] uppercase tracking-widest text-foreground/30 font-bold">Email</p>
+                                <a href="mailto:hello@digitalempire.studio" className="flex items-center gap-3 text-lg font-bold text-foreground hover:text-primary transition-colors">
+                                    <Mail className="w-5 h-5" />
+                                    hello@digitalempire.studio
+                                </a>
+                                <div className="flex items-center gap-3 text-lg font-bold text-foreground/40">
+                                    <MapPin className="w-5 h-5" />
                                     Bengaluru, India
-                                </p>
+                                </div>
                             </div>
                         </div>
                     </motion.div>
+
+                    {/* Right Side: Premium Form Card */}
+                    <div id="contact-form" className="relative">
+                        {/* Decorative background element */}
+                        <div className="absolute -top-12 -right-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
+                        <ContactForm />
+                    </div>
                 </div>
             </div>
-
-            {/* Subtle background glow */}
-            <div className="absolute -bottom-1/2 left-1/2 -translate-x-1/2 w-full aspect-square bg-primary/20 rounded-full blur-[160px] pointer-events-none opacity-50" />
         </section>
     );
 }
+
