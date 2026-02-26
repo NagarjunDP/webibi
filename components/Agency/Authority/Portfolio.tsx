@@ -1,18 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, X, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
 
 const projects = [
     {
@@ -22,6 +13,7 @@ const projects = [
         category: "Event Management",
         image: "/portfolio/srimudra.png",
         year: "2024",
+        url: "https://srimudraeventsandmanagement.com/",
         description: "A premium event management platform for a top Hyderabad agency, featuring elegant layouts and seamless booking flows.",
     },
     {
@@ -31,25 +23,8 @@ const projects = [
         category: "Production & Management",
         image: "/portfolio/silverstar.png",
         year: "2024",
+        url: "https://silverstareventsandproducitons.in",
         description: "Scale and authority for Mumbai's leading production house. High-performance design focused on large-scale event logistics.",
-    },
-    {
-        id: 3,
-        title: "Adhishakthi Events",
-        client: "Adhishakthi",
-        category: "Visual Identity",
-        image: "/portfolio/adhishakthi.png",
-        year: "2024",
-        description: "Bespoke digital architecture for a modern event company, focusing on minimalist elegance and conversion.",
-    },
-    {
-        id: 4,
-        title: "Vignahartha Events",
-        client: "Vignahartha",
-        category: "Digital Strategy",
-        image: "/portfolio/vignahartha.png",
-        year: "2023",
-        description: "A comprehensive brand transformation that shifted Vignahartha to a premium market position.",
     },
     {
         id: 5,
@@ -58,6 +33,7 @@ const projects = [
         category: "Web Platform",
         image: "/portfolio/shrievents.png",
         year: "2024",
+        url: "https://shrievents.vercel.app",
         description: "Streamlined web experience for a high-volume event agency, ensuring speed and clarity for clients.",
     },
     {
@@ -67,223 +43,113 @@ const projects = [
         category: "Experience Design",
         image: "/portfolio/festora.png",
         year: "2023",
+        url: "https://festoraevents.vercel.app",
         description: "Creating a sensory-rich digital experience that mirrors the festive atmosphere of their large-scale events.",
     },
 ];
 
 export function Portfolio() {
-    const sectionRef = useRef<HTMLElement>(null);
-    const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
-
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start start", "end end"],
-    });
-
-    // Highly optimized smooth physics for "Liquid" feel
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 80, // Lowered for more "mass" and smoothness
-        damping: 40,   // Increased to prevent oscillation
-        restDelta: 0.001
-    });
-
-    // Phase 1-2: Layered Stacking (0.0 to 0.4)
-    const stackX = useTransform(smoothProgress, [0, 0.4], ["0%", "-60%"]);
-
-    // Phase 3: 3D Perspective Flip (0.4 to 0.6)
-    const rotateX = useTransform(smoothProgress, [0.4, 0.6], [0, 10]);
-    const rotateY = useTransform(smoothProgress, [0.4, 0.6], [0, -5]);
-    const z = useTransform(smoothProgress, [0.4, 0.6], [0, -200]);
-
-    // Phase 4: Grid Resolution (0.6 to 0.8)
-    const gridOpacity = useTransform(smoothProgress, [0.6, 0.75], [0, 1]);
-    const stackOpacity = useTransform(smoothProgress, [0.7, 0.8], [1, 0]);
-    const gridY = useTransform(smoothProgress, [0.6, 0.8], [50, 0]);
-
     return (
-        <section ref={sectionRef} id="portfolio" className="relative h-[600vh] bg-[#F7F7F8]">
-            <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden perspective-[2000px]">
-
-                <div className="container mx-auto px-6 md:px-8 relative z-30 pointer-events-none">
+        <section id="portfolio" className="relative pt-8 lg:pt-12 pb-24 lg:pb-32 bg-background overflow-hidden">
+            <div className="container mx-auto px-6 md:px-8">
+                {/* ══ CLEAN EDITORIAL HEADER ══ */}
+                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8 lg:gap-32 mb-12 lg:mb-16">
                     <motion.div
-                        style={{ opacity: useTransform(smoothProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]) }}
-                        className="mb-8 lg:mb-12"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex-shrink-0"
                     >
-                        <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-foreground/30 mb-4 lg:mb-6">Portfolio</p>
-                        <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground mb-4">
-                            Selected <span className="text-primary italic font-serif">Work.</span>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.6em] text-primary/60 mb-6 font-mono">Series . 01 / Case Studies</p>
+                        <h2 className="text-[clamp(3rem,7vw,7rem)] font-bold tracking-tighter text-foreground leading-[0.85] uppercase">
+                            Selected <br />
+                            <span className="italic font-serif normal-case text-foreground/30">Works.</span>
                         </h2>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                        className="max-w-md lg:pt-20"
+                    >
+                        <div className="w-12 h-px bg-primary/20 mb-6" />
+                        <p className="text-xl lg:text-2xl text-foreground/40 leading-relaxed font-light italic font-serif">
+                            Focused on technical excellence and aesthetic authority. These are the tools we build for founders who demand more.
+                        </p>
                     </motion.div>
                 </div>
 
-                {/* STACKED PHASE (Phases 1-3) */}
-                <motion.div
-                    style={{
-                        opacity: stackOpacity,
-                        rotateX,
-                        rotateY,
-                        translateZ: z,
-                        pointerEvents: useTransform(smoothProgress, [0.7, 0.71], ["auto", "none"])
-                    }}
-                    className="absolute inset-x-0 top-1/2 -translate-y-1/2 overflow-visible"
-                >
-                    <motion.div
-                        style={{ x: stackX }}
-                        className="flex gap-20 lg:gap-32 px-[10vw] items-center"
-                    >
-                        {projects.slice(0, 4).map((project, index) => (
-                            <motion.div
-                                key={project.id}
-                                style={{
-                                    scale: useTransform(smoothProgress, [0, 0.15], [0.8, 1]),
-                                    x: useTransform(smoothProgress, [0.1, 0.4], [0, index * -50]), // Stacking overlap
-                                    zIndex: 10 - index
-                                }}
-                                className="relative shrink-0 w-[85vw] lg:w-[60vw] aspect-[4/3] lg:aspect-[16/10] rounded-[2rem] lg:rounded-[3rem] bg-white border border-foreground/5 shadow-[0_50px_150px_-30px_rgba(11,13,18,0.15)] overflow-hidden group cursor-pointer"
-                                onClick={() => setSelectedProject(project)}
-                            >
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    fill
-                                    priority={index === 0}
-                                    sizes="(max-width: 768px) 85vw, 60vw"
-                                    className="object-cover transition-transform duration-[2s] group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D12]/80 via-transparent to-transparent opacity-0 md:opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                                    <div className="absolute bottom-6 left-6 lg:bottom-12 lg:left-12">
-                                        <p className="text-[10px] lg:text-xs font-bold uppercase tracking-widest text-primary mb-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-100">{project.category}</p>
-                                        <h4 className="text-2xl lg:text-5xl font-bold tracking-tighter text-white opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-200">{project.title}</h4>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </motion.div>
-
-                {/* GRID PHASE (Phases 4-5) */}
-                <motion.div
-                    style={{
-                        opacity: gridOpacity,
-                        y: gridY,
-                        pointerEvents: useTransform(smoothProgress, [0.7, 0.71], ["none", "auto"])
-                    }}
-                    className="absolute inset-0 flex flex-col items-center justify-center pt-24"
-                >
-                    <div className="container mx-auto px-8 max-h-[80vh] overflow-y-auto no-scrollbar">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                            {projects.map((project, index) => (
-                                <motion.div
-                                    key={project.id}
-                                    initial={{ opacity: 0, y: 40 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-                                    className="group relative aspect-[1.4] rounded-[2rem] bg-white border border-foreground/5 shadow-sm overflow-hidden cursor-pointer"
-                                    onClick={() => setSelectedProject(project)}
-                                >
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        className="object-cover group-hover:scale-105 transition-transform duration-[1.5s]"
-                                    />
-                                    <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8 z-10 bg-gradient-to-t from-white/95 via-white/40 to-transparent">
-                                        <div className="flex items-end justify-between">
-                                            <div>
-                                                <p className="text-[10px] font-bold uppercase tracking-widest text-[#0B0D12]/40 mb-1 lg:mb-2">{project.category}</p>
-                                                <h4 className="text-xl lg:text-2xl font-bold tracking-tight text-[#0B0D12]">{project.title}</h4>
-                                            </div>
-                                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-[#0B0D12] flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-500">
-                                                <ArrowUpRight className="w-4 h-4 lg:w-5 lg:h-5" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* MODAL / PROJECT DETAIL */}
-                <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
-                    <DialogContent className="max-w-6xl h-[90vh] p-0 rounded-[4rem] overflow-hidden bg-white border-0">
-                        <DialogHeader className="sr-only">
-                            <DialogTitle>{selectedProject?.title}</DialogTitle>
-                            <DialogDescription>{selectedProject?.description}</DialogDescription>
-                        </DialogHeader>
-
-                        <div className="flex flex-col lg:flex-row h-full">
-                            <div className="lg:w-1/2 relative h-1/2 lg:h-full">
-                                {selectedProject && (
-                                    <Image
-                                        src={selectedProject.image}
-                                        alt={selectedProject.title}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                )}
-                            </div>
-                            <div className="lg:w-1/2 p-8 lg:p-24 flex flex-col justify-center bg-white overflow-y-auto">
-                                <button
-                                    onClick={() => setSelectedProject(null)}
-                                    className="absolute top-6 right-6 lg:top-10 lg:right-10 w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-foreground/5 flex items-center justify-center hover:bg-foreground hover:text-white transition-all duration-500 z-50 bg-white/50 backdrop-blur-sm"
-                                >
-                                    <X className="w-4 h-4 lg:w-5 lg:h-5" />
-                                </button>
-
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.2 }}
-                                >
-                                    <div className="inline-flex items-center gap-2 mb-6 lg:mb-10 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest">
-                                        <Sparkles className="w-3.5 h-3.5 fill-primary" />
-                                        Case Study — {selectedProject?.year}
-                                    </div>
-
-                                    <h2 className="text-4xl lg:text-7xl font-bold tracking-tighter text-foreground leading-[0.95] mb-6 lg:mb-8">
-                                        {selectedProject?.title}
-                                    </h2>
-
-                                    <div className="grid grid-cols-2 gap-8 lg:gap-12 mb-8 lg:mb-12 py-8 lg:py-12 border-y border-foreground/5">
-                                        <div>
-                                            <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-2">Client</p>
-                                            <p className="text-lg lg:text-xl font-bold tracking-tight">{selectedProject?.client}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-2">Category</p>
-                                            <p className="text-lg lg:text-xl font-bold tracking-tight">{selectedProject?.category}</p>
-                                        </div>
-                                    </div>
-
-                                    <p className="text-lg lg:text-xl text-foreground/50 leading-relaxed mb-8 lg:mb-12 font-serif italic">
-                                        {selectedProject?.description}
-                                    </p>
-
-                                    <button className="h-14 lg:h-16 px-10 lg:px-12 rounded-full bg-foreground text-white font-bold tracking-tight hover:bg-primary transition-all duration-500">
-                                        View Live Experience
-                                    </button>
-                                </motion.div>
-                            </div>
-                        </div>
-                    </DialogContent>
-                </Dialog>
-
-                {/* Perspective depth indicator */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-8">
-                    <motion.div
-                        style={{ height: "1px", width: useTransform(smoothProgress, [0, 1], ["0px", "128px"]), backgroundColor: "rgba(11, 13, 18, 0.1)" }}
-                    />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/20">
-                        Scroll Momentum
-                    </span>
-                    <motion.div
-                        style={{ height: "1px", width: useTransform(smoothProgress, [0, 1], ["0px", "128px"]), backgroundColor: "rgba(11, 13, 18, 0.1)" }}
-                    />
+                {/* ══ STRUCTURED PREMIUM GRID ══ */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-24 lg:gap-y-36">
+                    {projects.map((project, index) => (
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                            index={index}
+                        />
+                    ))}
                 </div>
             </div>
         </section>
+    );
+}
+
+function ProjectCard({ project, index }: { project: any; index: number }) {
+    return (
+        <motion.a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, delay: index % 2 * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative block cursor-pointer"
+        >
+            {/* ══ IMAGE WRAPPER ══ */}
+            <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] lg:rounded-[2rem] bg-secondary border border-foreground/5 transition-all duration-1000 group-hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] group-hover:border-primary/20">
+                <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-[2.5s] ease-out group-hover:scale-105"
+                />
+
+                {/* Floating Detail */}
+                <div className="absolute top-6 left-6 overflow-hidden rounded-full backdrop-blur-md bg-background/80 border border-border/50 px-4 py-1.5 opacity-0 group-hover:opacity-100 transition-all duration-700 transform translate-y-2 group-hover:translate-y-0">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-foreground">{project.year} . DESIGN CRAFT</span>
+                </div>
+
+                {/* Hover Indicator */}
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            </div>
+
+            {/* ══ CONTENT WRAPPER ══ */}
+            <div className="mt-10 flex flex-col items-start gap-4">
+                <div className="flex items-center gap-4 w-full">
+                    <div className="h-px flex-1 bg-foreground/5" />
+                    <span className="text-[10px] font-mono text-primary/40">0{index + 1}</span>
+                </div>
+
+                <div className="flex flex-col gap-1">
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/60 mb-1">{project.category}</p>
+                    <h3 className="text-3xl lg:text-5xl font-bold tracking-tighter text-foreground group-hover:text-primary transition-all duration-700">
+                        {project.title}
+                    </h3>
+                </div>
+
+                <p className="text-base text-foreground/40 max-w-sm line-clamp-2 font-light tracking-tight group-hover:text-foreground/60 transition-colors duration-700">
+                    {project.description}
+                </p>
+
+                <div className="flex items-center gap-2 group/btn mt-2">
+                    <span className="text-xs font-bold uppercase tracking-widest text-foreground/20 group-hover:text-primary transition-colors duration-500">Visit Live Website</span>
+                    <ArrowUpRight className="w-4 h-4 text-foreground/10 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500" />
+                </div>
+            </div>
+        </motion.a>
     );
 }

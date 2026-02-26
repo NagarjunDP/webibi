@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 export function ControlPreview() {
     return (
-        <section className="section-padding bg-[#F7F7F8] overflow-hidden">
+        <section className="section-padding bg-secondary overflow-hidden">
             <div className="container mx-auto px-6 md:px-8">
                 <div className="grid lg:grid-cols-[1fr_1.4fr] gap-16 lg:gap-24 items-center">
 

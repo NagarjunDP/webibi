@@ -32,28 +32,31 @@
 }
 
 :root {
-  /* Human-Crafted Neutral Palette */
-  --background: 240 10% 97%;
-  /* #F7F7F8 */
-  --foreground: 225 30% 6%;
-  /* #0B0D12 */
+  /* Natural Paper Palette - Warmer Tone */
+  --background: 36 33% 97%;
+  /* #FAF8F2 (Warm Linen) */
+  --foreground: 222 47% 11%;
+  /* #0F172A (Text Primary) */
 
-  --card: 0 0% 100%;
-  --card-foreground: 225 30% 6%;
+  --card: 36 33% 98.5%;
+  /* Secondary Sections: #FFFEF9 */
+  --card-foreground: 222 47% 11%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 225 30% 6%;
+  --popover-foreground: 222 47% 11%;
 
   /* Strategic Electric Blue Accent */
   --primary: 221 83% 53%;
-  /* #2563EB */
+  /* #2563EB (Accent Color) */
   --primary-foreground: 210 40% 98%;
 
-  --secondary: 240 5% 94%;
-  --secondary-foreground: 225 30% 6%;
+  --secondary: 36 25% 94%;
+  /* #F5F1E6 (Soft Warm Beige) */
+  --secondary-foreground: 222 47% 11%;
 
-  --muted: 240 5% 94%;
-  --muted-foreground: 225 10% 45%;
+  --muted: 215 16% 47%;
+  /* #475569 (Text Secondary) */
+  --muted-foreground: 215 16% 47%;
 
   --accent: 221 83% 53%;
   --accent-foreground: 210 40% 98%;
@@ -61,11 +64,12 @@
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
 
-  --border: 240 5% 90%;
-  --input: 240 5% 90%;
+  --border: 220 13% 91%;
+  /* rgba(0,0,0,0.06) equivalent */
+  --input: 220 13% 91%;
   --ring: 221 83% 53%;
 
-  --radius: 0.75rem;
+  --radius: 1rem;
 }
 
 @layer base {

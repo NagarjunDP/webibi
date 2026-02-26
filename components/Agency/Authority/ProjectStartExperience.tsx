@@ -16,7 +16,8 @@ import {
     Mail,
     PartyPopper,
     ShieldCheck,
-    Clock
+    Clock,
+    ChevronLeft
 } from "lucide-react";
 import { db } from "@/lib/firebase/config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -84,17 +85,17 @@ export default function ProjectStartExperience() {
     return (
         <div className="w-full max-w-4xl mx-auto min-h-[500px] flex flex-col items-center justify-center relative">
 
-            {/* Progress Bar */}
+            {/* Progress Bar (Premium Refinement) */}
             <AnimatePresence>
                 {step > 0 && step < 5 && (
                     <motion.div
-                        initial={{ opacity: 0, y: -10 }}
+                        initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="absolute top-0 left-0 right-0 h-1 bg-foreground/5 rounded-full overflow-hidden"
+                        exit={{ opacity: 0, y: -20 }}
+                        className="absolute -top-12 left-0 right-0 h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden"
                     >
                         <motion.div
-                            className="h-full bg-primary"
+                            className="h-full bg-primary shadow-[0_0_15px_rgba(37,99,235,0.4)]"
                             initial={{ width: 0 }}
                             animate={{ width: `${progress}%` }}
                             transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -103,245 +104,259 @@ export default function ProjectStartExperience() {
                 )}
             </AnimatePresence>
 
-            <AnimatePresence mode="popLayout">
-                {/* Step 0: Emotional Hook */}
-                {step === 0 && (
-                    <motion.div
-                        key="hook"
-                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -10, scale: 1.02 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-center py-20 will-change-transform"
-                    >
-                        <h2 className="text-4xl md:text-7xl font-bold tracking-tighter text-foreground mb-8 text-balance">
-                            Let’s Create Something <br />
-                            <span className="text-primary italic font-serif">Amazing Together.</span>
-                        </h2>
-                        <p className="text-lg md:text-xl text-foreground/40 mb-12 max-w-lg mx-auto leading-relaxed">
-                            Tell us about your business — we’ll handle the technical heavy lifting and design the rest.
-                        </p>
-                        <Button
-                            onClick={handleNext}
-                            className="h-16 px-12 rounded-full bg-primary hover:bg-foreground text-white text-lg font-bold group transition-all active:scale-95"
+            {/* Container for Form Steps - Glass Card */}
+            <div className={cn(
+                "w-full transition-all duration-700",
+                step > 0 && "p-8 md:p-12 lg:p-16 rounded-[2.5rem] bg-white/60 backdrop-blur-2xl border border-white/40 shadow-[0_40px_100px_-20px_rgba(15,23,42,0.1)]"
+            )}>
+                <AnimatePresence mode="wait">
+                    {/* Step 0: Hook */}
+                    {step === 0 && (
+                        <motion.div
+                            key="hook"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            className="text-center py-10"
                         >
-                            Start Your Project
-                            <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                    </motion.div>
-                )}
+                            <p className="text-lg md:text-xl text-[#64748B] mb-12 max-w-lg mx-auto leading-relaxed">
+                                Share your vision with us. We handle the technical heavy lifting so you can focus on growth.
+                            </p>
+                            <Button
+                                onClick={handleNext}
+                                className="h-16 px-12 rounded-full bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-lg font-bold group shadow-xl shadow-blue-500/20 active:scale-95 transition-all"
+                            >
+                                Start Your Project
+                                <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                        </motion.div>
+                    )}
 
-                {/* Step 1: Project Type */}
-                {step === 1 && (
-                    <motion.div
-                        key="type"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="w-full py-12 will-change-transform"
-                    >
-                        <div className="text-center mb-12">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Step 1 of 4</span>
-                            <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">What do you need?</h3>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {PROJECT_TYPES.map((type) => (
-                                <button
-                                    key={type.id}
-                                    onClick={() => {
-                                        setFormData({ ...formData, serviceType: type.label });
-                                        handleNext();
-                                    }}
-                                    className={cn(
-                                        "p-6 rounded-2xl border text-left transition-all active:scale-[0.98] transform-gpu",
-                                        formData.serviceType === type.label
-                                            ? "bg-primary border-primary text-white shadow-lg shadow-primary/20"
-                                            : "bg-white border-foreground/5 hover:border-primary/30 hover:shadow-xl hover:shadow-foreground/5"
-                                    )}
-                                >
-                                    <type.icon className={cn("w-6 h-6 mb-4", formData.serviceType === type.label ? "text-white" : "text-primary")} />
-                                    <p className="font-bold text-lg mb-1">{type.label}</p>
-                                    <p className={cn("text-xs", formData.serviceType === type.label ? "text-white/70" : "text-foreground/40")}>
-                                        {type.description}
-                                    </p>
+                    {/* Step 1: Project Type */}
+                    {step === 1 && (
+                        <motion.div
+                            key="type"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            className="w-full"
+                        >
+                            <div className="flex items-center justify-between mb-12">
+                                <button onClick={handleBack} className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#64748B] hover:text-[#0F172A] transition-colors">
+                                    <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                                    Go Back
                                 </button>
-                            ))}
-                        </div>
-                        <div className="mt-12 text-center">
-                            <button onClick={handleBack} className="text-foreground/30 hover:text-foreground text-xs font-bold uppercase tracking-widest transition-colors">Go Back</button>
-                        </div>
-                    </motion.div>
-                )}
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">01 / 04</span>
+                            </div>
 
-                {/* Step 2: Budget */}
-                {step === 2 && (
-                    <motion.div
-                        key="budget"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="w-full py-12 text-center will-change-transform"
-                    >
-                        <div className="mb-12">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Step 2 of 4</span>
-                            <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">What’s your budget?</h3>
-                        </div>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            {BUDGET_RANGES.map((range) => (
-                                <button
-                                    key={range}
-                                    onClick={() => {
-                                        setFormData({ ...formData, budget: range });
-                                        handleNext();
-                                    }}
-                                    className={cn(
-                                        "h-16 px-8 rounded-full border text-sm font-bold tracking-tight transition-all active:scale-[0.98] transform-gpu",
-                                        formData.budget === range
-                                            ? "bg-primary border-primary text-white shadow-lg shadow-primary/20"
-                                            : "bg-white border-foreground/5 hover:border-primary/30 hover:scale-105"
-                                    )}
-                                >
-                                    {range}
+                            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0F172A] mb-10 text-center">What can we build for you?</h3>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {PROJECT_TYPES.map((type) => (
+                                    <button
+                                        key={type.id}
+                                        onClick={() => {
+                                            setFormData({ ...formData, serviceType: type.label });
+                                            handleNext();
+                                        }}
+                                        className={cn(
+                                            "group p-6 rounded-2xl border text-left transition-all duration-300",
+                                            formData.serviceType === type.label
+                                                ? "bg-[#2563EB] border-[#2563EB] text-white shadow-lg shadow-blue-500/20"
+                                                : "bg-[#F8FAFC] border-[#E2E8F0] hover:border-[#2563EB]/30 hover:bg-white"
+                                        )}
+                                    >
+                                        <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-colors",
+                                            formData.serviceType === type.label ? "bg-white/20" : "bg-white shadow-sm"
+                                        )}>
+                                            <type.icon className={cn("w-5 h-5", formData.serviceType === type.label ? "text-white" : "text-[#2563EB]")} />
+                                        </div>
+                                        <p className="font-bold text-lg mb-1 tracking-tight">{type.label}</p>
+                                        <p className={cn("text-xs leading-relaxed", formData.serviceType === type.label ? "text-white/70" : "text-[#64748B]")}>
+                                            {type.description}
+                                        </p>
+                                    </button>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* Step 2: Budget */}
+                    {step === 2 && (
+                        <motion.div
+                            key="budget"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            className="w-full text-center"
+                        >
+                            <div className="flex items-center justify-between mb-12">
+                                <button onClick={handleBack} className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#64748B] hover:text-[#0F172A] transition-colors">
+                                    <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                                    Go Back
                                 </button>
-                            ))}
-                        </div>
-                        <div className="mt-16">
-                            <button onClick={handleBack} className="text-foreground/30 hover:text-foreground text-xs font-bold uppercase tracking-widest transition-colors">Go Back</button>
-                        </div>
-                    </motion.div>
-                )}
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">02 / 04</span>
+                            </div>
 
-                {/* Step 3: Contact Info */}
-                {step === 3 && (
-                    <motion.div
-                        key="info"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="w-full py-12 max-w-xl mx-auto will-change-transform"
-                    >
-                        <div className="text-center mb-12">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Step 3 of 4</span>
-                            <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">Tell us who you are.</h3>
-                        </div>
-                        <div className="space-y-6">
-                            <div className="relative">
-                                <User className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/20" />
-                                <Input
-                                    placeholder="Your Name"
-                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium shadow-sm transition-all"
-                                    value={formData.name}
-                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                />
+                            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0F172A] mb-12">What’s your budget range?</h3>
+
+                            <div className="flex flex-wrap justify-center gap-4">
+                                {BUDGET_RANGES.map((range) => (
+                                    <button
+                                        key={range}
+                                        onClick={() => {
+                                            setFormData({ ...formData, budget: range });
+                                            handleNext();
+                                        }}
+                                        className={cn(
+                                            "h-16 px-10 rounded-full border text-sm font-bold tracking-tight transition-all",
+                                            formData.budget === range
+                                                ? "bg-[#2563EB] border-[#2563EB] text-white shadow-lg shadow-blue-500/20"
+                                                : "bg-[#F8FAFC] border-[#E2E8F0] hover:border-[#2563EB]/40 hover:bg-white hover:scale-105"
+                                        )}
+                                    >
+                                        {range}
+                                    </button>
+                                ))}
                             </div>
-                            <div className="relative">
-                                <Mail className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/20" />
-                                <Input
-                                    placeholder="Your Email"
-                                    type="email"
-                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium shadow-sm transition-all"
-                                    value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                />
+                        </motion.div>
+                    )}
+
+                    {/* Step 3: Contact Info */}
+                    {step === 3 && (
+                        <motion.div
+                            key="info"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            className="w-full max-w-xl mx-auto"
+                        >
+                            <div className="flex items-center justify-between mb-12">
+                                <button onClick={handleBack} className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#64748B] hover:text-[#0F172A] transition-colors">
+                                    <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                                    Go Back
+                                </button>
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">03 / 04</span>
                             </div>
-                            <div className="relative">
-                                <Phone className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/20" />
-                                <Input
-                                    placeholder="Phone / WhatsApp"
-                                    type="tel"
-                                    className="h-20 pl-14 pr-6 rounded-2xl bg-white border-foreground/5 focus:border-primary/30 text-lg font-medium shadow-sm transition-all"
-                                    value={formData.phone}
-                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                />
+
+                            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0F172A] mb-10 text-center">Tell us about yourself.</h3>
+
+                            <div className="space-y-5">
+                                <div className="relative group">
+                                    <User className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8] transition-colors group-focus-within:text-[#2563EB]" />
+                                    <Input
+                                        placeholder="Full Name"
+                                        className="h-16 pl-14 pr-6 rounded-2xl bg-[#F8FAFC] border-[#E2E8F0] focus:border-[#2563EB] focus:ring-[#2563EB]/10 text-base font-medium transition-all"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    />
+                                </div>
+                                <div className="relative group">
+                                    <Mail className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8] transition-colors group-focus-within:text-[#2563EB]" />
+                                    <Input
+                                        placeholder="Business Email"
+                                        type="email"
+                                        className="h-16 pl-14 pr-6 rounded-2xl bg-[#F8FAFC] border-[#E2E8F0] focus:border-[#2563EB] focus:ring-[#2563EB]/10 text-base font-medium transition-all"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    />
+                                </div>
+                                <div className="relative group">
+                                    <Phone className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8] transition-colors group-focus-within:text-[#2563EB]" />
+                                    <Input
+                                        placeholder="Mobile / WhatsApp"
+                                        type="tel"
+                                        className="h-16 pl-14 pr-6 rounded-2xl bg-[#F8FAFC] border-[#E2E8F0] focus:border-[#2563EB] focus:ring-[#2563EB]/10 text-base font-medium transition-all"
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="mt-12 flex justify-between items-center">
-                            <button onClick={handleBack} className="text-foreground/30 hover:text-foreground text-xs font-bold uppercase tracking-widest transition-colors">Go Back</button>
+
                             <Button
                                 onClick={handleNext}
                                 disabled={!formData.name || !formData.email || !formData.phone}
-                                className="h-16 px-12 rounded-full bg-primary text-white font-bold transition-all active:scale-[0.98]"
+                                className="w-full mt-10 h-16 rounded-2xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white font-bold transition-all shadow-xl shadow-blue-500/20 active:scale-95"
                             >
                                 Continue
+                                <ArrowRight className="ml-2 w-4 h-4" />
                             </Button>
-                        </div>
-                    </motion.div>
-                )}
+                        </motion.div>
+                    )}
 
-                {/* Step 4: Details */}
-                {step === 4 && (
-                    <motion.div
-                        key="details"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="w-full py-12 max-w-xl mx-auto will-change-transform"
-                    >
-                        <div className="text-center mb-12">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Step 4 of 4</span>
-                            <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">Any specific goals?</h3>
-                        </div>
-                        <Textarea
-                            placeholder="Tell us about your project, goals, or timeline... (Optional)"
-                            className="min-h-[200px] p-8 rounded-3xl bg-white border-foreground/5 focus:border-primary/30 text-lg leading-relaxed placeholder:text-foreground/20 shadow-sm transition-all"
-                            value={formData.message}
-                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        />
-                        <div className="mt-12">
+                    {/* Step 4: Details */}
+                    {step === 4 && (
+                        <motion.div
+                            key="details"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            className="w-full max-w-xl mx-auto"
+                        >
+                            <div className="flex items-center justify-between mb-12">
+                                <button onClick={handleBack} className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#64748B] hover:text-[#0F172A] transition-colors">
+                                    <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                                    Go Back
+                                </button>
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">04 / 04</span>
+                            </div>
+
+                            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0F172A] mb-10 text-center">Any specific goals?</h3>
+
+                            <Textarea
+                                placeholder="Briefly describe your project goals, timeline, or any special requirements..."
+                                className="min-h-[180px] p-6 rounded-2xl bg-[#F8FAFC] border-[#E2E8F0] focus:border-[#2563EB] text-base leading-relaxed transition-all"
+                                value={formData.message}
+                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            />
+
                             <Button
                                 onClick={handleSubmit}
                                 disabled={loading}
-                                className="w-full h-20 rounded-full bg-primary hover:bg-foreground text-white text-xl font-bold transition-all active:scale-[0.98]"
+                                className="w-full mt-10 h-20 rounded-2xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-lg font-bold shadow-2xl shadow-blue-500/20 transition-all active:scale-95"
                             >
-                                {loading ? <Loader2 className="w-8 h-8 animate-spin" /> : "Get My Free Proposal"}
+                                {loading ? <Loader2 className="w-7 h-7 animate-spin" /> : "Request Free Proposal"}
                             </Button>
-                        </div>
-                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-foreground/30">
-                            <div className="flex items-center gap-2">
-                                <ShieldCheck className="w-4 h-4" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">No commitment required</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">Reply within 24 hours</span>
-                            </div>
-                        </div>
-                        <div className="mt-12 text-center">
-                            <button onClick={handleBack} className="text-foreground/30 hover:text-foreground text-xs font-bold uppercase tracking-widest transition-colors">Go Back</button>
-                        </div>
-                    </motion.div>
-                )}
 
-                {/* Step 5: Success */}
-                {step === 5 && (
-                    <motion.div
-                        key="success"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="text-center py-20 will-change-transform"
-                    >
-                        <div className="w-24 h-24 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-10">
-                            <PartyPopper className="w-12 h-12 text-emerald-500" />
-                        </div>
-                        <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-foreground mb-6 text-balance">You’re all set!</h2>
-                        <p className="text-lg md:text-xl text-foreground/40 mb-12 max-w-sm mx-auto leading-relaxed">
-                            Excellent choice. Our team is already reviewing your details. Expect a personalized proposal in your inbox within 24 hours.
-                        </p>
-                        <Button
-                            onClick={() => setStep(0)}
-                            variant="outline"
-                            className="rounded-full px-12 h-14 active:scale-95 transition-all"
+                            <div className="mt-10 grid grid-cols-2 gap-6 opacity-40">
+                                <div className="flex items-center gap-2">
+                                    <ShieldCheck className="w-4 h-4" />
+                                    <span className="text-[9px] font-bold uppercase tracking-widest">No Commitment</span>
+                                </div>
+                                <div className="flex items-center gap-2 justify-end">
+                                    <Clock className="w-4 h-4" />
+                                    <span className="text-[9px] font-bold uppercase tracking-widest">24h Response</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* Step 5: Success */}
+                    {step === 5 && (
+                        <motion.div
+                            key="success"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="text-center py-10"
                         >
-                            Back to Start
-                        </Button>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                            <div className="w-24 h-24 rounded-3xl bg-emerald-500/10 flex items-center justify-center mx-auto mb-10 rotate-12">
+                                <PartyPopper className="w-12 h-12 text-emerald-600 -rotate-12" />
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-[#0F172A] mb-6">Inquiry Received.</h2>
+                            <p className="text-lg text-[#64748B] mb-12 max-w-sm mx-auto leading-relaxed">
+                                Excellent. Our strategy team is reviewing your requirements. Expect a high-performance proposal in your inbox within 24 hours.
+                            </p>
+                            <Button
+                                onClick={() => setStep(0)}
+                                variant="outline"
+                                className="rounded-full px-12 h-14 border-[#E2E8F0] text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-all"
+                            >
+                                Back to Start
+                            </Button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
         </div>
     );
 }

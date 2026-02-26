@@ -32,40 +32,42 @@
 }
 
 :root {
-  /* Premium Neutral Palette - Slightly warmer for human touch */
-  --background: 240 10% 98%;
-  /* #F8F8F9 */
-  --foreground: 225 35% 8%;
-  /* #0D1017 */
+  /* Natural Paper Palette - Warmer Tone (Linen/Beige) */
+  --background: 36 33% 97%;
+  /* #FAF8F2 (Warm Linen) */
+  --foreground: 222 47% 11%;
+  /* #0F172A (Text Primary) */
 
-  --card: 0 0% 100%;
-  --card-foreground: 225 35% 8%;
+  --card: 36 33% 98.7%;
+  /* Secondary Sections: #FFFEFA */
+  --card-foreground: 222 47% 11%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 225 35% 8%;
+  --popover-foreground: 222 47% 11%;
 
-  /* Strategic Deep Indigo Accent */
-  --primary: 221 80% 50%;
-  /* #1E5AD8 */
+  /* Strategic Electric Blue Accent */
+  --primary: 221 83% 53%;
+  /* #2563EB (Accent Color) */
   --primary-foreground: 210 40% 98%;
 
-  --secondary: 240 5% 95%;
-  /* #F1F1F3 */
-  --secondary-foreground: 225 35% 8%;
+  --secondary: 36 25% 94%;
+  /* #F5F1E6 (Soft Warm Beige) */
+  --secondary-foreground: 222 47% 11%;
 
-  --muted: 240 5% 95%;
-  --muted-foreground: 225 12% 42%;
+  --muted: 215 16% 47%;
+  /* #475569 (Text Secondary) */
+  --muted-foreground: 215 16% 47%;
 
-  --accent: 221 80% 50%;
+  --accent: 221 83% 53%;
   --accent-foreground: 210 40% 98%;
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
 
-  --border: 240 6% 91%;
-  /* #E9E9EB */
-  --input: 240 6% 91%;
-  --ring: 221 80% 50%;
+  --border: 36 20% 90%;
+  /* Warm border: #EFE9DE equivalent */
+  --input: 36 20% 90%;
+  --ring: 221 83% 53%;
 
   --radius: 0.875rem;
 

@@ -2,117 +2,156 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const services = [
     {
         number: "01",
-        title: "Bespoke Design & Identity",
-        description: "Premium, human-crafted UI/UX for Indian startups. We build high-end visual identities that build instant trust and credibility for your brand.",
+        title: "Product Design",
+        category: "Visual Identity & UX",
+        description: "Bespoke digital foundations for founders who value excellence. We build identities that command instant trust.",
     },
     {
         number: "02",
-        title: "Affordable High-End Engineering",
-        description: "Next-generation technical excellence at affordable prices. We build fast, SEO-ready websites with absolute zero monthly retainers.",
+        title: "Technical Architecture",
+        category: "Next.js & React",
+        description: "Next-gen engineering that prioritizes speed and long-term ownership. Zero retainers, absolute technical authority.",
     },
     {
         number: "03",
-        title: "E-Commerce Success",
-        description: "Transform your business with high-conversion e-commerce solutions. Optimized for mobile shoppers and lightning-fast transactions.",
+        title: "Performance Infra",
+        category: "Speed & SEO",
+        description: "Optimized for 99+ PageSpeed scores. We translate technical excellence into literal business growth.",
     },
     {
         number: "04",
-        title: "SEO & Growth Dominance",
-        description: "Don't just launch, rank. Our search engine optimized architectures ensure you stay ahead of the competition on Google and beyond.",
+        title: "The Habibi Principle",
+        category: "100% Ownership",
+        description: "Zero fluff. Full source code access. We don't build subscribers; we build digital empires for founders.",
     },
 ];
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.1
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: {
+        opacity: 0,
+        y: 30,
+        filter: "blur(8px)"
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        transition: {
+            duration: 1.2,
+            ease: [0.16, 1, 0.3, 1]
+        }
+    }
+};
+
 export function Features() {
     return (
-        <section id="services" className="section-padding bg-white overflow-hidden">
-            <div className="container mx-auto px-6 md:px-8">
-
-                {/* Asymmetrical Header */}
-                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 lg:gap-12 mb-16 lg:mb-32">
+        <section id="services" className="relative py-20 lg:py-32 bg-secondary overflow-hidden">
+            <div className="container mx-auto px-6 md:px-8 relative z-10">
+                {/* ══ CLEAN EDITORIAL HEADER ══ */}
+                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-12 lg:gap-32 mb-16 lg:mb-20">
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="max-w-xl text-center lg:text-left"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={itemVariants}
+                        className="flex-shrink-0"
                     >
-                        <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-foreground/30 mb-6 lg:mb-8">What we do</p>
-                        <h2 className="text-4xl sm:text-6xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[1] lg:leading-[0.9]">
-                            Designing the <br />
-                            <span className="text-foreground/20 italic font-serif">Future of Trust.</span>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.6em] text-primary/40 mb-8 font-mono">Expertise . 02</p>
+                        <h2 className="text-[clamp(3.5rem,8vw,7.5rem)] font-bold tracking-tighter text-foreground leading-[0.85] uppercase">
+                            Boutique <br />
+                            <span className="text-foreground/20 italic font-serif normal-case">Solutions.</span>
                         </h2>
                     </motion.div>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                        className="text-lg lg:text-xl text-foreground/50 max-w-sm lg:mb-4 text-center lg:text-left mx-auto lg:mx-0"
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={itemVariants}
+                        className="max-w-md lg:pt-24"
                     >
-                        We don't just build websites; we craft authority. Every pixel is intentional, every interaction is earned.
-                    </motion.p>
+                        <div className="w-12 h-px bg-primary/20 mb-8" />
+                        <p className="text-xl lg:text-2xl text-foreground/40 leading-relaxed font-light italic font-serif">
+                            Focused technical craftsmanship for founders who prioritize absolute authority over generic vanity metrics.
+                        </p>
+                    </motion.div>
                 </div>
 
-                {/* Typography-led List */}
-                <div className="grid border-t border-foreground/5">
+                {/* ══ SERVICE LIST ══ */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    variants={containerVariants}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-16 lg:gap-y-32"
+                >
                     {services.map((service, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-                            className="group relative flex flex-col lg:grid lg:grid-cols-[100px_1fr_auto] items-center lg:items-center gap-6 lg:gap-12 py-10 lg:py-16 border-b border-foreground/5 hover:bg-[#F7F7F8] transition-colors px-6 lg:px-12 lg:-mx-12 rounded-[2rem]"
+                            variants={itemVariants}
+                            className="group relative flex flex-col items-start"
                         >
-                            <span className="text-xl font-bold text-foreground/20 font-serif italic uppercase tracking-widest leading-none">
-                                {service.number}
-                            </span>
-
-                            <div className="max-w-2xl text-center lg:text-left">
-                                <h3 className="text-2xl lg:text-5xl font-bold tracking-tighter text-foreground mb-3 lg:mb-4 group-hover:translate-x-4 transition-transform duration-700">
-                                    {service.title}
-                                </h3>
-                                <p className="text-base lg:text-lg text-foreground/40 max-w-lg transition-colors group-hover:text-foreground/60 duration-500">
-                                    {service.description}
-                                </p>
+                            <div className="flex items-center gap-4 mb-6 w-full">
+                                <span className="text-[10px] font-mono text-primary/20 uppercase tracking-[0.3em] font-bold">
+                                    {service.number}
+                                </span>
+                                <div className="h-px flex-1 bg-foreground/5" />
+                                <span className="text-[9px] font-black uppercase tracking-widest text-primary/40 group-hover:text-primary transition-colors duration-700">
+                                    {service.category}
+                                </span>
                             </div>
 
-                            <div className="w-16 h-16 rounded-full border border-foreground/5 flex items-center justify-center group-hover:bg-foreground group-hover:text-white transition-all duration-500 scale-90 group-hover:scale-100 opacity-0 group-hover:opacity-100">
-                                <ArrowUpRight className="w-6 h-6" />
-                            </div>
+                            <h3 className="text-3xl lg:text-5xl font-bold tracking-tighter text-foreground group-hover:text-primary transition-colors duration-700 mb-6">
+                                {service.title}
+                            </h3>
+
+                            <p className="text-lg lg:text-xl text-foreground/40 leading-snug font-light tracking-tight transition-colors duration-700 group-hover:text-foreground/60 max-w-md">
+                                {service.description}
+                            </p>
+
+                            <div className="mt-8 overflow-hidden rounded-full w-0 group-hover:w-full h-px bg-primary/20 transition-all duration-1000 ease-out" />
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
 
-                {/* Final Callout (Asymmetrical) */}
-                <div className="mt-32 flex justify-end">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="bg-primary/5 p-8 lg:p-20 rounded-[2rem] lg:rounded-[3rem] max-w-2xl w-full"
-                    >
-                        <h3 className="text-xl lg:text-2xl font-bold tracking-tight text-foreground mb-6">Need a custom solution?</h3>
-                        <p className="text-base lg:text-lg text-foreground/60 mb-10 leading-relaxed">
-                            If your vision doesn't fit into a box, we'll build a new one. We specialize in high-complexity digital products that require deep design thinking.
+                {/* ══ FINAL CTA ══ */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={itemVariants}
+                    className="mt-32 lg:mt-56 border-t border-foreground/5 pt-20 flex flex-col md:flex-row items-baseline justify-between gap-12"
+                >
+                    <div className="max-w-md">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary/40 mb-4">Phase . Next</p>
+                        <p className="text-3xl lg:text-5xl font-bold tracking-tighter text-foreground/10 leading-none">
+                            Ready to scale your digital presence?
                         </p>
-                        <Link href="#contact" className="text-primary font-bold tracking-widest uppercase text-[10px] md:text-xs flex items-center justify-center lg:justify-start gap-3 group">
-                            Book a discovery call
-                            <div className="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
-                                <ArrowUpRight className="w-4 h-4" />
-                            </div>
-                        </Link>
-                    </motion.div>
-                </div>
+                    </div>
+                    <Link href="#contact" className="group">
+                        <span className="text-2xl lg:text-6xl font-bold tracking-tighter text-foreground group-hover:text-primary transition-colors duration-700 flex items-center gap-8">
+                            Start Project
+                            <ArrowUpRight className="w-8 h-8 lg:w-16 lg:h-16 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-700 ease-out text-primary/20 group-hover:text-primary" />
+                        </span>
+                    </Link>
+                </motion.div>
             </div>
         </section>
     );
 }
-
-import Link from "next/link";

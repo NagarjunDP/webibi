@@ -26,16 +26,16 @@ export function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-background/80 backdrop-blur-xl border-b border-border"
-            : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+          ? "bg-white/90 backdrop-blur-xl border-b border-slate-100 shadow-[0_4px_30px_rgba(0,0,0,0.03)]"
+          : "bg-transparent"
+          }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="group flex items-center gap-3">
-              <span className="text-sm font-medium tracking-[0.2em] uppercase text-foreground">
+              <span className={`text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 ${scrolled ? "text-foreground" : "text-[#0F172A]"
+                }`}>
                 Digital Empire
               </span>
             </Link>
@@ -45,7 +45,10 @@ export function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
+                  className={`text-sm transition-colors duration-500 tracking-wide ${scrolled
+                    ? "text-muted-foreground hover:text-foreground"
+                    : "text-[#0F172A]/50 hover:text-[#0F172A]"
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -55,7 +58,8 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-6">
               <Link
                 href="#contact"
-                className="group flex items-center gap-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+                className={`group flex items-center gap-2 text-sm font-medium transition-colors duration-500 ${scrolled ? "text-foreground hover:text-muted-foreground" : "text-[#0F172A] hover:text-[#0F172A]/70"
+                  }`}
               >
                 <span>Start a project</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -64,7 +68,8 @@ export function Navbar() {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 text-foreground"
+              className={`lg:hidden p-2 transition-colors duration-500 ${scrolled ? "text-foreground" : "text-[#0F172A]"
+                }`}
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -74,9 +79,8 @@ export function Navbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-40 bg-background transition-all duration-500 lg:hidden ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-40 bg-background transition-all duration-500 lg:hidden ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
       >
         <div className="flex flex-col justify-center items-center h-full gap-8">
           {navItems.map((item, i) => (

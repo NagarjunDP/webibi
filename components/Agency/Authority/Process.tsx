@@ -5,100 +5,104 @@ import { Search, PenTool, Code2, Rocket, ShieldCheck } from "lucide-react";
 
 const STEPS = [
     {
-        title: "Discovery",
-        description: "We deep-dive into your business goals, target audience, and competition to map out a clear digital strategy.",
-        icon: Search,
-        color: "bg-blue-500/10 text-blue-500"
+        title: "The Reality Check",
+        label: "01 / Audit",
+        description: "Standard agencies start with a quote. We start with a forensic audit. If your current site isn't losing you money, we'll tell you to keep it."
     },
     {
-        title: "Architecture",
-        description: "Bespoke wireframing and technical planning to ensure a scalable, future-proof site structure.",
-        icon: ShieldCheck,
-        color: "bg-purple-500/10 text-purple-500"
+        title: "Zero Fluff Foundation",
+        label: "02 / Architecture",
+        description: "No generic templates. We build bespoke digital foundations that your competition can't replicate. Precision engineering over aesthetic guesswork."
     },
     {
-        title: "Design",
-        description: "Premium, human-crafted UI/UX that captures your brand's essence and builds instant credibility.",
-        icon: PenTool,
-        color: "bg-pink-500/10 text-pink-500"
+        title: "Human Supremacy",
+        label: "03 / Design",
+        description: "Forget AI-generated mediocrity. We craft human-centric UI that builds visceral trust in seconds. Design that commands authority, not just attention."
     },
     {
-        title: "Engineering",
-        description: "Clean, SEO-ready code with lightning-fast performance and zero dependency on monthly retainers.",
-        icon: Code2,
-        color: "bg-emerald-500/10 text-emerald-500"
+        title: "Total Ownership",
+        label: "04 / Engineering",
+        description: "No retainers. No dependency. We ship clean, SEO-pioneered code that you own 100%. Your empire should stand on its own."
     },
     {
-        title: "Launch",
-        description: "Final optimization, deployment to global CDN, and handoff of full ownership and source code.",
-        icon: Rocket,
-        color: "bg-orange-500/10 text-orange-500"
+        title: "The Handoff",
+        label: "05 / Launch",
+        description: "We don't just 'deploy'. We hand over the keys to your global CDN and the full source code. You're the founder, not a subscriber."
     }
 ];
 
 export default function Process() {
     return (
-        <section id="process" className="section-padding bg-background relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
-
+        <section id="process" className="relative py-24 lg:py-48 bg-card overflow-hidden">
             <div className="container mx-auto px-6 md:px-8">
-                <div className="max-w-4xl mx-auto text-center mb-16 lg:mb-24">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-foreground/30 mb-6">Execution</p>
-                    <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tighter text-foreground mb-6">
-                        A Transparent <br />
-                        <span className="text-primary italic font-serif">Journey.</span>
-                    </h2>
-                    <p className="text-lg text-foreground/50 max-w-2xl mx-auto">
-                        From initial audit to final launch, we follow a rigorous 5-step process designed for clarity, speed, and ownership.
-                    </p>
+                {/* Clean Section Identifier */}
+                <div className="mb-24 lg:mb-32">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#0F172A]/20 mb-8">Service Methodology</p>
+                        <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-bold tracking-tighter text-[#0F172A] leading-[1.05] uppercase">
+                            The <br />
+                            <span className="text-[#0F172A]/20 italic font-serif normal-case">Process.</span>
+                        </h2>
+                    </motion.div>
                 </div>
 
-                <div className="grid md:grid-cols-5 gap-8 relative">
-                    {/* Connecting line for desktop */}
-                    <div className="hidden md:block absolute top-[40px] left-[10%] right-[10%] h-px bg-foreground/5" />
-
+                {/* Vertical Process Feed */}
+                <div className="space-y-24 lg:space-y-40">
                     {STEPS.map((step, index) => (
                         <motion.div
                             key={step.title}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.8 }}
-                            className="relative flex flex-col items-center text-center group"
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                            className="relative flex flex-col md:flex-row gap-8 md:gap-24 items-start"
                         >
-                            <div className={`${step.color} w-20 h-20 rounded-2xl flex items-center justify-center mb-6 relative z-10 border border-foreground/5 group-hover:scale-110 transition-transform duration-500`}>
-                                <step.icon className="w-8 h-8" />
-                                <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-background border border-foreground/10 flex items-center justify-center text-[10px] font-black text-foreground/40">
-                                    0{index + 1}
-                                </div>
+                            {/* Step Index Label */}
+                            <div className="md:w-1/4 flex-shrink-0">
+                                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#0F172A]/30">
+                                    {step.label}
+                                </span>
                             </div>
 
-                            <h3 className="text-xl font-bold tracking-tight text-foreground mb-3">{step.title}</h3>
-                            <p className="text-sm text-foreground/40 leading-relaxed font-medium">
-                                {step.description}
-                            </p>
+                            {/* Step Content */}
+                            <div className="md:flex-1 max-w-2xl">
+                                <h3 className="text-3xl lg:text-4xl font-bold tracking-tight text-[#0F172A] mb-6">
+                                    {step.title}
+                                </h3>
+                                <p className="text-lg lg:text-xl text-[#475569] leading-relaxed font-medium">
+                                    {step.description}
+                                </p>
+                            </div>
                         </motion.div>
                     ))}
                 </div>
 
-                {/* Trust Footer */}
-                <div className="mt-16 lg:mt-24 pt-12 border-t border-foreground/5 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                            <ShieldCheck className="w-6 h-6 text-emerald-500" />
+                {/* Trust Footer - Minimalist */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="mt-32 lg:mt-56 pt-16 border-t border-slate-100 flex flex-col items-center text-center"
+                >
+                    <div className="flex items-center gap-4 mb-8">
+                        <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
+                            <ShieldCheck className="w-6 h-6 text-blue-600" />
                         </div>
-                        <div className="text-left">
-                            <p className="text-sm font-bold text-foreground">100% Satisfaction Guarantee</p>
-                            <p className="text-xs text-foreground/40">We work until you are obsessed with the result.</p>
-                        </div>
+                        <p className="text-xl font-bold text-[#0F172A]">The Webibi Guarantee</p>
                     </div>
-                    <div className="flex gap-12 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
-                        {/* Placeholder for small certification badges if needed */}
-                        <span className="text-[10px] font-bold uppercase tracking-widest">ISO 9001:2015</span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Google Partner</span>
+                    <p className="text-[#475569] max-w-xl mx-auto mb-12 italic font-medium">
+                        "We don't stop until you're obsessed. No exceptions, no excuses. Just pure authority."
+                    </p>
+                    <div className="flex gap-12 opacity-30 grayscale items-center">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">Verified High Performance</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">Habibi Approved</span>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

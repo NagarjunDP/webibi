@@ -8,15 +8,17 @@ import { Pricing } from "./Authority/Pricing";
 import { Portfolio } from "./Authority/Portfolio";
 import Process from "./Authority/Process";
 import { Contact } from "./Authority/Contact";
+import { Philosophy } from "./Authority/Philosophy";
 import { Footer } from "./Authority/Footer";
 import FloatingCTA from "./Authority/FloatingCTA";
 
 export default function AgencyWebsite() {
     return (
-        <main className="min-h-screen bg-[#F7F7F8] text-[#0B0D12] selection:bg-primary/20 selection:text-primary font-sans">
+        <main className="min-h-screen bg-background text-[#0B0D12] selection:bg-primary/20 selection:text-primary font-sans">
             <Header />
             <Hero />
             <Trust />
+            <Philosophy />
             <Portfolio />
             <Process />
             <Features />

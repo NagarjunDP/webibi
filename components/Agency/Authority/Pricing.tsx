@@ -32,7 +32,7 @@ const plans = [
 
 export function Pricing() {
     return (
-        <section id="pricing" className="section-padding bg-[#F7F7F8]">
+        <section id="pricing" className="section-padding bg-background">
             <div className="container mx-auto px-6 md:px-8">
 
                 <div className="max-w-4xl mb-16 lg:mb-32">

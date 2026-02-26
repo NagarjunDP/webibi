@@ -24,7 +24,7 @@ const steps = [
 
 export function SEOSection() {
     return (
-        <section id="process" className="section-padding bg-white overflow-hidden">
+        <section id="process" className="section-padding bg-background overflow-hidden">
             <div className="container mx-auto px-6 md:px-8">
 
                 <div className="max-w-4xl mb-16 lg:mb-32">

@@ -91,7 +91,7 @@ const organizationSchema = {
 };
 
 export const viewport = {
-  themeColor: '#0f0f1a',
+  themeColor: '#FAF8F2',
 }
 
 export default function RootLayout({
@@ -100,7 +100,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
