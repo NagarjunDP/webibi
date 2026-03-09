@@ -1,34 +1,36 @@
 import React from "react"
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Syne, DM_Sans, Playfair_Display, DM_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { AuthProvider } from '@/context/AuthContext'
 import './globals.css'
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: 'swap' });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: 'swap' });
+const syne = Syne({ subsets: ["latin"], variable: "--font-syne", weight: ["400", "500", "600", "700", "800"] });
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", weight: ["400", "500", "700"] });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", weight: ["400", "700", "900"] });
+const dmMono = DM_Mono({ subsets: ["latin"], variable: "--font-dm-mono", weight: ["400", "500"] });
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://digitalempire.studio';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: {
-    default: 'Digital Empire | Affordable Premium Web Design for Indian Startups & SMBs',
-    template: '%s | Digital Empire'
-  },
-  description: 'Top-rated affordable web design company in India. We build high-performance, SEO-ready websites for startups and small businesses with zero monthly retainers.',
+  title: "Webibi | Website Design + SEO Agency for Indian Startups",
+  description: "Webibi builds affordable, high-performance websites and SEO strategies for Indian startups and businesses. 14-day delivery, 100% ownership, no monthly fees. Ranked #1 for results.",
   keywords: [
-    'Affordable web design India',
-    'Startup website development India',
-    'Small business web design',
-    'SEO friendly agency websites',
-    'Budget website designer for startups',
-    'Professional web design Delhi Mumbai Bangalore',
-    'No monthly fee web design'
+    "web design agency India",
+    "affordable website design for startups",
+    "SEO agency for small business India",
+    "website development Hyderabad",
+    "website design Mumbai",
+    "Next.js agency India",
+    "Google ranking website India",
+    "web design for startups India",
+    "affordable web design India",
+    "14 day website delivery"
   ],
-  authors: [{ name: 'Digital Empire Studio' }],
-  creator: 'Digital Empire Studio',
-  publisher: 'Digital Empire Studio',
+  authors: [{ name: 'Webibi Studio' }],
+  creator: 'Webibi Studio',
+  publisher: 'Webibi Studio',
   formatDetection: {
     email: false,
     address: false,
@@ -38,26 +40,26 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Digital Empire | Affordable Premium Web Design for Indian Startups',
-    description: 'Empowering Indian SMBs and Startups with SEO-ready, mobile-responsive websites. Affordable quality with zero monthly retainers.',
+    title: 'Webibi | Website Design + SEO Agency for Indian Startups',
+    description: 'Affordable, high-performance websites and SEO for Indian startups. 14-day delivery. 100% ownership. No retainers.',
     url: '/',
-    siteName: 'Digital Empire',
+    siteName: 'Webibi Studio',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Digital Empire - Premium Web Development',
+        alt: 'Webibi - Building Digital Presence',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Digital Empire | Affordable Web Design for Indian Startups',
-    description: 'SEO-ready, high-performance websites for Indian SMBs. No retainers, full ownership, affordable pricing.',
-    creator: '@digitalempire',
+    title: 'Webibi | Website Design + SEO Agency for Indian Startups',
+    description: 'High-performance websites and SEO for Indian SMBs. No retainers, full ownership, affordable pricing.',
+    creator: '@webibistudio',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -73,25 +75,48 @@ export const metadata: Metadata = {
   },
 }
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Digital Empire",
-  "url": baseUrl,
-  "logo": `${baseUrl}/logo.png`,
-  "sameAs": [
-    "https://twitter.com/digitalempire",
-    "https://linkedin.com/company/digitalempire"
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+1-555-0123",
-    "contactType": "customer service"
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Webibi",
+    "url": baseUrl,
+    "logo": `${baseUrl}/logo.png`,
+    "description": "Boutique web design + SEO agency for Indian startups.",
+    "sameAs": [
+      "https://twitter.com/webibistudio",
+      "https://linkedin.com/company/webibistudio"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-555-0123",
+      "contactType": "customer service"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Website Design & Development",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Webibi"
+    },
+    "description": "Bespoke, fast-loading sites in Next.js & React"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "SEO & Google Rankings",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Webibi"
+    },
+    "description": "Rank on page 1 with technical + content SEO"
   }
-};
+];
 
 export const viewport = {
-  themeColor: '#FAF8F2',
+  themeColor: '#0A0A0A',
 }
 
 export default function RootLayout({
@@ -100,17 +125,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
+        {schemas.map((schema, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
       </head>
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
+      <body className={`${syne.variable} ${dmSans.variable} ${playfair.variable} ${dmMono.variable} font-body antialiased`}>
         <AuthProvider>
           {children}
         </AuthProvider>

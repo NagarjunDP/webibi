@@ -1,128 +1,57 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 @theme {
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
+  --color-background: #0A0F2C;
+  --color-foreground: #F5F0EB;
+  --color-primary: #2D7DD2;
+  --color-secondary: #111111;
+  --color-muted: #1A1A1A;
+  --color-accent: #F4A300;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input: rgba(255, 255, 255, 0.05);
+  --color-ring: #2D7DD2;
 
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-
-  --radius: 1rem;
+  --font-syne: var(--font-syne);
+  --font-dm-sans: var(--font-dm-sans);
+  --font-body: var(--font-dm-sans);
 }
 
-:root {
-  /* Natural Paper Palette - Warmer Tone (Linen/Beige) */
-  --background: 36 33% 97%;
-  /* #FAF8F2 (Warm Linen) */
-  --foreground: 222 47% 11%;
-  /* #0F172A (Text Primary) */
+@layer base {
+  :root {
+    --background: 231 63% 11%;
+    --foreground: 30 29% 94%;
+    --card: 231 63% 13%;
+    --card-foreground: 30 29% 94%;
+    --popover: 231 63% 11%;
+    --popover-foreground: 30 29% 94%;
+    --primary: 211 65% 50%;
+    --primary-foreground: 30 29% 94%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 63%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 40 100% 48%;
+    --accent-foreground: 0 0% 4%;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 100% / 0.05;
+    --ring: 211 65% 50%;
+    --radius: 0.75rem;
 
-  --card: 36 33% 98.7%;
-  /* Secondary Sections: #FFFEFA */
-  --card-foreground: 222 47% 11%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
-
-  /* Strategic Electric Blue Accent */
-  --primary: 221 83% 53%;
-  /* #2563EB (Accent Color) */
-  --primary-foreground: 210 40% 98%;
-
-  --secondary: 36 25% 94%;
-  /* #F5F1E6 (Soft Warm Beige) */
-  --secondary-foreground: 222 47% 11%;
-
-  --muted: 215 16% 47%;
-  /* #475569 (Text Secondary) */
-  --muted-foreground: 215 16% 47%;
-
-  --accent: 221 83% 53%;
-  --accent-foreground: 210 40% 98%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 36 20% 90%;
-  /* Warm border: #EFE9DE equivalent */
-  --input: 36 20% 90%;
-  --ring: 221 83% 53%;
-
-  --radius: 0.875rem;
-
-  /* Fluid Typography Scale (Step 0 to step 5) */
-  --text-xs: clamp(0.64rem, 0.05vw + 0.63rem, 0.67rem);
-  --text-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
-  --text-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
-  --text-lg: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
-  --text-xl: clamp(1.56rem, 1.05vw + 1.3rem, 2.11rem);
-  --text-2xl: clamp(1.95rem, 1.76vw + 1.51rem, 2.81rem);
-  --text-3xl: clamp(2.44rem, 2.9vw + 1.72rem, 3.75rem);
-  --text-4xl: clamp(3.05rem, 4.67vw + 1.88rem, 5rem);
-
-  /* Fluid Spacing Scale */
-  --space-xs: clamp(0.75rem, 0.75rem + 0vw, 0.75rem);
-  --space-s: clamp(1rem, 1rem + 0vw, 1rem);
-  --space-m: clamp(1.5rem, 1.5rem + 0vw, 1.5rem);
-  --space-l: clamp(2rem, 1.14vw + 1.71rem, 2.63rem);
-  --space-xl: clamp(3rem, 2.29vw + 2.43rem, 4.25rem);
-  --space-2xl: clamp(4.5rem, 4.57vw + 3.36rem, 7rem);
-  --space-3xl: clamp(7rem, 9.14vw + 4.71rem, 12rem);
+    /* Global Spacing Scale */
+    --section-py: clamp(3rem, 6vw, 6rem);
+    --container-px: clamp(1rem, 4vw, 2rem);
+  }
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-
-  html {
-    scroll-behavior: smooth;
+    border-color: hsl(var(--border));
   }
 
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/10 selection:text-primary;
-    /* Editorial Typography Base */
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary font-dm-sans;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03";
-    letter-spacing: -0.011em;
-    line-height: 1.55;
-    font-size: var(--text-base);
-  }
-
-  h1 {
-    font-size: var(--text-4xl);
-  }
-
-  h2 {
-    font-size: var(--text-3xl);
-  }
-
-  h3 {
-    font-size: var(--text-2xl);
-  }
-
-  h4 {
-    font-size: var(--text-xl);
   }
 
   h1,
@@ -131,37 +60,55 @@
   h4,
   h5,
   h6 {
-    @apply tracking-tighter font-bold text-foreground leading-[1.1];
-    text-wrap: balance;
+    @apply font-syne tracking-tight font-bold;
   }
 }
 
 @layer utilities {
-  .noise {
-    position: relative;
+  .section-padding {
+    padding-top: var(--section-py);
+    padding-bottom: var(--section-py);
   }
 
-  .noise::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    opacity: 0.015;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  .container-padding {
+    padding-left: var(--container-px);
+    padding-right: var(--container-px);
   }
 
   .glass {
-    @apply bg-white/70 backdrop-blur-xl border border-white/20;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+    @apply bg-secondary/70 backdrop-blur-xl;
+    border: 1px solid rgba(34, 34, 34, 0.5);
   }
 
-  .section-padding {
-    padding-top: var(--space-3xl);
-    padding-bottom: var(--space-3xl);
+  .text-gold {
+    @apply text-primary;
   }
 
-  .text-balance {
-    text-wrap: balance;
+  .bg-dark-100 {
+    @apply bg-[#0A0A0A];
+  }
+
+  .bg-dark-200 {
+    @apply bg-[#111111];
+  }
+
+  .bg-dark-300 {
+    @apply bg-[#1A1A1A];
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: fit-content;
+    animation: marquee 30s linear infinite;
   }
 }
